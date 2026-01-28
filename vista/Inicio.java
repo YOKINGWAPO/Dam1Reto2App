@@ -3,27 +3,32 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JPasswordField;
-import java.awt.Canvas;
 
-import javax.swing.ImageIcon;
 import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.Color;
+
+import javax.swing.JPasswordField;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Inicio extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JTextField textField;
-	private JPasswordField passwordField;
-
+	private JPanel PanelInicio;
+	private JTextField txtUsuario;
+	private JPasswordField textPass;
+	private JButton btnInicio;
+	private EventosInicio EventosInicio;
+	private JPanel panelMenu;
+	private JButton btnSalir;
+	private Image imagen;
+	private FondoInicio fondoInicio;
+	private Conexion conexion;
 	/**
 	 * Launch the application.
 	 */
@@ -44,59 +49,131 @@ public class Inicio extends JFrame {
 	 * Create the frame.
 	 */
 	public Inicio() {
+		
 		setUndecorated(true); 
 		setResizable(false);
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 861, 542);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
-		JButton btnNewButton_1 = new JButton("Iniciar Sesion");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		PanelInicio = new JPanel();
+		PanelInicio.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(PanelInicio);
+		PanelInicio.setLayout(null);
+		
+		btnInicio = new JButton("Iniciar Sesion");
+		btnInicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton_1.setBounds(306, 400, 180, 47);
-		contentPane.add(btnNewButton_1);
+		btnInicio.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnInicio.setBounds(290, 381, 321, 47);
+		PanelInicio.add(btnInicio);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.BOLD, 15));
-		textField.setBounds(112, 166, 321, 47);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtUsuario = new JTextField();
+		txtUsuario.setToolTipText("Usuario");
+		txtUsuario.setFont(new Font("Tahoma", Font.BOLD, 13));
+		txtUsuario.setBounds(290, 231, 321, 39);
+		PanelInicio.add(txtUsuario);
+		txtUsuario.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Usuario");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel.setBounds(28, 111, 172, 57);
-		contentPane.add(lblNewLabel);
+		textPass = new JPasswordField();
+		textPass.setFont(new Font("Tahoma", Font.BOLD, 15));
+		textPass.setBounds(290, 306, 321, 39);
+		PanelInicio.add(textPass);
 		
-		JLabel lblNewLabel_1 = new JLabel("Contraseña");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel_1.setBounds(28, 247, 123, 91);
-		contentPane.add(lblNewLabel_1);
-		
-		passwordField = new JPasswordField();
-		passwordField.setFont(new Font("Tahoma", Font.BOLD, 15));
-		passwordField.setBounds(112, 314, 321, 39);
-		contentPane.add(passwordField);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(0, 128, 255));
-		panel.setForeground(new Color(0, 0, 0));
-		panel.setBounds(498, 0, 363, 542);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		JButton btnNewButton = new JButton("X");
-		btnNewButton.setBackground(new Color(255, 255, 255));
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnNewButton.setBounds(287, 0, 76, 32);
-		panel.add(btnNewButton);
+		JLabel lblLogo = new JLabel("Logo");
+		lblLogo.setBounds(284, 52, 295, 207);
+		PanelInicio.add(lblLogo);
+		//lblLogo.setIcon(new ImageIcon(getClass().getResource("logo.png")));
+		ImageIcon icon = new ImageIcon(getClass().getResource("logo.png"));
+		Image img = icon.getImage().getScaledInstance(
+		    lblLogo.getWidth(), 
+		    lblLogo.getHeight(),
+		    Image.SCALE_SMOOTH   
+		);
 
-		  
+		lblLogo.setIcon(new ImageIcon(img));
+
+		
+		panelMenu = new JPanel();
+		panelMenu.setBounds(0, 0, 861, 53);
+		PanelInicio.add(panelMenu);
+		panelMenu.setLayout(null);
+		panelMenu.setOpaque(false);
+
+		
+		btnSalir = new JButton("X");
+		btnSalir.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnSalir.setBounds(784, 0, 77, 53);
+		panelMenu.add(btnSalir);
+		btnSalir.setOpaque(false);
+		btnSalir.setContentAreaFilled(false);
+		btnSalir.setBorderPainted(false);
+		
+
+		
+		 
+		EventosInicio = new EventosInicio(this);
+		
+		fondoInicio = new FondoInicio(this);
+		fondoInicio.setBounds(0, 0, 861, 542);
+		PanelInicio.add(fondoInicio);
+		
+		conexion=new Conexion();
+		
+		
+		
+		
+	}
+	
+	
+
+	public JButton getBtnSalir() {
+		return btnSalir;
+	}
+
+	public void setBtnSalir(JButton btnSalir) {
+		this.btnSalir = btnSalir;
+	}
+
+	public JPanel getPanelMenu() {
+		return panelMenu;
+	}
+
+	public void setPanelMenu(JPanel panelMenu) {
+		this.panelMenu = panelMenu;
+	}
+
+	public JButton getBtnInicio() {
+		return btnInicio;
+	}
+
+	public void setBtnInicio(JButton btnInicio) {
+		this.btnInicio = btnInicio;
+	}
+
+	public JTextField getTxtUsuario() {
+		return txtUsuario;
+	}
+
+	public void setTxtUsuario(JTextField txtUsuario) {
+		this.txtUsuario = txtUsuario;
+	}
+
+	public JPasswordField getTextPass() {
+		return textPass;
+	}
+
+	public void setTextPass(JPasswordField textPass) {
+		this.textPass = textPass;
+	}
+
+	public JPanel getPanelInicio() {
+		return PanelInicio;
+	}
+
+	public void setPanelInicio(JPanel panelInicio) {
+		PanelInicio = panelInicio;
 	}
 }
