@@ -1,3 +1,5 @@
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -16,9 +18,9 @@ import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Inicio extends JFrame {
+public class Inicio extends JPanel {
 
-	private static final long serialVersionUID = 1L;
+//	private static final long serialVersionUID = 1L;
 	private JPanel PanelInicio;
 	private JTextField txtUsuario;
 	private JPasswordField textPass;
@@ -29,37 +31,21 @@ public class Inicio extends JFrame {
 	private Image imagen;
 	private FondoInicio fondoInicio;
 	private Conexion conexion;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Inicio frame = new Inicio();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private App app;
 
-	/**
-	 * Create the frame.
-	 */
-	public Inicio() {
+	public Inicio(App app) {
+		this.app=app;
 		
-		setUndecorated(true); 
-		setResizable(false);
-		setAlwaysOnTop(true);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 861, 542);
+		setLayout(new BorderLayout());
 		
 		PanelInicio = new JPanel();
+		PanelInicio.setBounds(348, 20, 1, 1);
 		PanelInicio.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(PanelInicio);
+		
 		PanelInicio.setLayout(null);
+		add(PanelInicio, BorderLayout.CENTER);
+		
 		
 		btnInicio = new JButton("Iniciar Sesion");
 		btnInicio.addActionListener(new ActionListener() {
@@ -114,7 +100,7 @@ public class Inicio extends JFrame {
 
 		
 		 
-		EventosInicio = new EventosInicio(this);
+		EventosInicio = new EventosInicio(this, app);
 		
 		fondoInicio = new FondoInicio(this);
 		fondoInicio.setBounds(0, 0, 861, 542);
@@ -175,5 +161,17 @@ public class Inicio extends JFrame {
 
 	public void setPanelInicio(JPanel panelInicio) {
 		PanelInicio = panelInicio;
+	}
+
+
+
+	public App getApp() {
+		return app;
+	}
+
+
+
+	public void setApp(App app) {
+		this.app = app;
 	}
 }

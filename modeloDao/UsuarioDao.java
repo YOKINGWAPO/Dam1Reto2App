@@ -19,10 +19,12 @@ public class UsuarioDao {
 		System.out.println(Nombre);
 		System.out.println(Contrasena);
 		//setContentPane(menu);
-		
-		
 				
 		return 0;
+	}
+	public Usuario datosUsuario() {
+		
+		return usuario;
 	}
 	
 }

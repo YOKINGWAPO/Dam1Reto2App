@@ -8,10 +8,13 @@ public class EventosInicio {
 	private UsuarioDao usuarioDao;
 	private Menu menu;
 	private int xMouse, yMouse;
+	private App app;
 	 
-	public EventosInicio(Inicio inicio) {
+	public EventosInicio(Inicio inicio, App app) {
 		usuarioDao = new UsuarioDao(this);
-		menu = new Menu(this);
+		this.app=app;
+		//menu = new Menu(this);
+		
 		
 		this.inicio = inicio;
 		inicio.getBtnSalir().addActionListener(new ActionListener() {
@@ -39,7 +42,7 @@ public class EventosInicio {
 	                int x = e.getXOnScreen();
 	                int y = e.getYOnScreen();
 	               
-	                inicio.setLocation(x - xMouse, y - yMouse);
+	                app.setLocation(x - xMouse, y - yMouse);
 	                
 	            }
 	        });
@@ -54,11 +57,12 @@ public class EventosInicio {
 					System.out.println("No Inicio de sesion");
 					return;
 				}
-				inicio.setContentPane(menu.getPanelMenu());
-				inicio.revalidate();
-				inicio.repaint();
-				inicio.getRootPane().revalidate();
-				
+//				inicio.setContentPane(menu.getPanelMenu());
+//				inicio.revalidate();
+//				inicio.repaint();
+//				inicio.getRootPane().revalidate();
+//				
+				app.mostrar("menu");
 			}
 		});
 		
