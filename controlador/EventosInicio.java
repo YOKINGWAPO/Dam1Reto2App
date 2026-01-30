@@ -9,6 +9,7 @@ public class EventosInicio {
 	private Menu menu;
 	private int xMouse, yMouse;
 	private App app;
+	private int idUsuario;
 	 
 	public EventosInicio(Inicio inicio, App app) {
 		usuarioDao = new UsuarioDao(this);
@@ -51,12 +52,13 @@ public class EventosInicio {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int id;
-				id = usuarioDao.comprobarLogin();
-				if (id == 3) {
+				
+				idUsuario = usuarioDao.comprobarLogin();
+				if (idUsuario == 0) {
 					System.out.println("No Inicio de sesion");
 					return;
 				}
+				System.out.println(idUsuario);
 //				inicio.setContentPane(menu.getPanelMenu());
 //				inicio.revalidate();
 //				inicio.repaint();

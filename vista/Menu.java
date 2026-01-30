@@ -156,7 +156,7 @@ public class Menu extends JPanel {
 
 	private void addPanel(JPanel panel, String nombre) {
 		System.out.println(nombre);
-		System.out.println(panel);
+		//System.out.println(panel);
 		panelContenido.add(panel, nombre);
 		
 	}

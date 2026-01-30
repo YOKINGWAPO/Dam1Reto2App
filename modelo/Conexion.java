@@ -3,9 +3,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion {
-	 String url = "jdbc:oracle:thin:@localhost:1521/XEPDB1";
-     String user = "conexion";
-     String password = "Almi123";
+	 private static String url = "jdbc:oracle:thin:@localhost:1521/XEPDB1";
+     private static String user = "conexion";
+     private static String password = "Almi123";
      
     public Conexion() {
        
@@ -13,7 +13,8 @@ public class Conexion {
         comprobarConexion();
         
     }
-
+    
+    
 	public void comprobarConexion() {
 		try (Connection conn = DriverManager.getConnection(url, user, password)) {
             if (conn != null && !conn.isClosed()) {
@@ -28,6 +29,11 @@ public class Conexion {
 		
 	}
 	
+	public static Connection conectar() throws SQLException {
+       
+			return DriverManager.getConnection(url, user, password);
+		
+    }
 	
     
     
