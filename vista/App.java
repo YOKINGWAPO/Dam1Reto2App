@@ -8,6 +8,10 @@ import javax.swing.border.EmptyBorder;
 public class App extends JFrame {
 	private CardLayout layout = new CardLayout();
 	private JPanel contenedor = new JPanel(layout);
+	private Usuario usuario;
+	private Menu menu;
+	private Inicio inicio;
+	private int Logeo;
 
 
 	private static final long serialVersionUID = 1L;
@@ -30,7 +34,7 @@ public class App extends JFrame {
 	 * Create the frame.
 	 */
 	public App() {
-
+		Logeo=0;
 		setUndecorated(true); 
 		setResizable(false);
 		setAlwaysOnTop(true);
@@ -44,18 +48,20 @@ public class App extends JFrame {
 		System.out.println("Cargando Login");
 
 		setContentPane(contenedor);
+		inicio=new Inicio(this);
+		menu=new Menu(this);
+		
+		addPanel(inicio, "login");
 
-		addPanel(new Inicio(this), "login");
-
-		addPanel(new Menu(this), "menu");   
+		addPanel(menu, "menu");   
 
 		mostrar("login");
 
 	}
 
 	private void addPanel(JPanel panel, String nombre) {
-		System.out.println(nombre);
-		System.out.println(panel);
+		//System.out.println(nombre);
+		//System.out.println(panel);
 		contenedor.add(panel, nombre);
 
 	}
@@ -65,6 +71,31 @@ public class App extends JFrame {
 		contenedor.revalidate();
 		contenedor.repaint();
 
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+		gestionLogeo();
+		
+	}
+
+	private void gestionLogeo() {
+		
+		Logeo=1;
+		try {
+			menu.procesarProductos();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		menu.cargarPaneles();
+		menu.ponerNombre();
+		System.out.println(usuario.getNombre());
+		
+		
 	}
 
 }

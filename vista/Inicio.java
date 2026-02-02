@@ -106,7 +106,7 @@ public class Inicio extends JPanel {
 		fondoInicio.setBounds(0, 0, 861, 542);
 		PanelInicio.add(fondoInicio);
 		
-		conexion=new Conexion();
+		//conexion=new Conexion();
 		
 		
 		

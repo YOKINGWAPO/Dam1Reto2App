@@ -7,6 +7,9 @@ import java.awt.CardLayout;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import com.jgoodies.forms.layout.FormLayout;
@@ -29,46 +32,58 @@ public class Menu extends JPanel {
 	private JButton btnOpcion3;
 	private JButton btnOpcion2;
 	private JButton btnOpcion1;
+	private Opcion1 opcion1;
+	private Opcion2 opcion2;
+	private Opcion3 opcion3;
+	private Opcion4 opcion4;
+	private Opcion5 opcion5;
 	
+	private ProductosDao productosDao;
+	
+	List<Producto> lista = new ArrayList<>();
+
 	private CardLayout layout = new CardLayout();
 	JPanel panelContenido = new JPanel(layout);
+	private JLabel lblNombreUsu;
 
 	public Menu(App app) {
 		this.app=app;
-
+		
 		setBounds(100, 100, 868, 532);
 		PanelMenu = new JPanel();
 		setLayout(new BorderLayout());
-	
+
 		PanelMenu.setLayout(new BorderLayout(0, 0));
 		add(PanelMenu, BorderLayout.CENTER);
-		
+
 		PanelMenu2 = new JPanel();
 		PanelMenu2.setBackground(new Color(0, 204, 153));
 		PanelMenu.add(PanelMenu2, BorderLayout.NORTH);
 		PanelMenu2.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblNewLabel_3 = new JLabel("New label");
-		PanelMenu2.add(lblNewLabel_3, BorderLayout.WEST);
-		
+
+		lblNombreUsu = new JLabel("New label");
+		lblNombreUsu.setHorizontalAlignment(SwingConstants.CENTER);
+
+		PanelMenu2.add(lblNombreUsu, BorderLayout.WEST);
+
 		JPanel panel = new JPanel();
 		panel.setBorder(null);
 		PanelMenu2.add(panel, BorderLayout.EAST);
-		
+
 		btnMax = new JButton("[]");
 		btnMax.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(btnMax);
 		btnMax.setOpaque(false);
 		btnMax.setContentAreaFilled(false);
 		btnMax.setBorderPainted(false);
-		
+
 		btnSalir = new JButton("X");
 		panel.add(btnSalir);
 		btnSalir.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnSalir.setOpaque(false);
 		btnSalir.setContentAreaFilled(false);
 		btnSalir.setBorderPainted(false);
-		
+
 		JPanel PanelLateral = new JPanel();
 		PanelLateral.setBackground(new Color(0, 102, 255));
 		PanelMenu.add(PanelLateral, BorderLayout.WEST);
@@ -83,8 +98,7 @@ public class Menu extends JPanel {
 				ColumnSpec.decode("46px"),
 				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
 				ColumnSpec.decode("46px"),
-				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("46px"),},
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,},
 			new RowSpec[] {
 				FormSpecs.LINE_GAP_ROWSPEC,
 				RowSpec.decode("14px"),
@@ -114,58 +128,82 @@ public class Menu extends JPanel {
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
-		
+
 		JLabel lblNewLabel = new JLabel("MENU");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 19));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		PanelLateral.add(lblNewLabel, "6, 4");
-		
+
 		btnOpcion1 = new JButton("Opcion 1");
 		btnOpcion1.setFont(new Font("Tahoma", Font.BOLD, 18));
 		PanelLateral.add(btnOpcion1, "6, 8");
-		
+
 		btnOpcion2 = new JButton("Opcion 2");
 		btnOpcion2.setFont(new Font("Tahoma", Font.BOLD, 18));
 		PanelLateral.add(btnOpcion2, "6, 12");
-		
+
 		btnOpcion3 = new JButton("Opcion 3");
 		btnOpcion3.setFont(new Font("Tahoma", Font.BOLD, 18));
 		PanelLateral.add(btnOpcion3, "6, 16");
-		
+
 		btnOpcion4 = new JButton("Opcion 4");
 		btnOpcion4.setFont(new Font("Tahoma", Font.BOLD, 18));
 		PanelLateral.add(btnOpcion4, "6, 20");
-		
+
 		btnOpcion5 = new JButton("Opcion 5");
 		btnOpcion5.setFont(new Font("Tahoma", Font.BOLD, 18));
 		PanelLateral.add(btnOpcion5, "6, 24");
-		
-		
+
+
 		PanelMenu.add(panelContenido, BorderLayout.CENTER);
 
-		eventosMenu = new EventosMenu(this, app);
-		
-		 addPanel(new Opcion1(this), "Opcion1");
-		 addPanel(new Opcion2(this), "Opcion2");
-		 addPanel(new Opcion3(this), "Opcion3");
-		 addPanel(new Opcion4(this), "Opcion4");
-		 addPanel(new Opcion5(this), "Opcion5");
-		 
-		 mostrar("Opcion1");
-	}
 
+
+		eventosMenu = new EventosMenu(this, app);
+
+		
+
+
+		
+
+
+
+
+	}
+	public void cargarPaneles() {
+		opcion1=new Opcion1(this);
+		opcion2=new Opcion2(this);
+		opcion3=new Opcion3(this);
+		opcion4=new Opcion4(this);
+		opcion5=new Opcion5(this);
+		
+		addPanel(opcion1, "Opcion1");
+		addPanel(opcion2, "Opcion2");
+		addPanel(opcion3, "Opcion3");
+		addPanel(opcion4, "Opcion4");
+		addPanel(opcion5, "Opcion5");
+
+		mostrar("Opcion1");
+	}
+	public void procesarProductos() {
+		productosDao = new ProductosDao();
+		lista=productosDao.obtenerProductos();
+	}
+	public void ponerNombre(){
+		lblNombreUsu.setText(app.getUsuario().getNombre());
+	}
 	private void addPanel(JPanel panel, String nombre) {
-		System.out.println(nombre);
+		//System.out.println(nombre);
 		//System.out.println(panel);
 		panelContenido.add(panel, nombre);
-		
+
 	}
 
 	public void mostrar(String nombre) {
-		 layout.show(panelContenido, nombre);
-		 panelContenido.revalidate();
-		 panelContenido.repaint();
-		
+		layout.show(panelContenido, nombre);
+		panelContenido.revalidate();
+		panelContenido.repaint();
+
 	}
 	public JPanel getPanelMenu() {
 		return PanelMenu;
@@ -254,6 +292,20 @@ public class Menu extends JPanel {
 
 	public void setBtnOpcion1(JButton btnOpcion1) {
 		this.btnOpcion1 = btnOpcion1;
+	}
+
+	public JLabel getLblNombreUsu() {
+		return lblNombreUsu;
+	}
+
+	public void setLblNombreUsu(JLabel lblNombreUsu) {
+		this.lblNombreUsu = lblNombreUsu;
+	}
+	public List<Producto> getLista() {
+		return lista;
+	}
+	public void setLista(List<Producto> lista) {
+		this.lista = lista;
 	}
 
 }
