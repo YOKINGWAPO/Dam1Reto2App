@@ -11,12 +11,12 @@ public class Producto {
 	private String especificaciones;
 	private BigDecimal precio;
 	private int stock;
-	private Blob imagen;
+	private byte[] imagen;
 	private int activo;
 	private Timestamp fechaRegistro;
-	
-	
-	public Producto(int  id_componente, int id_proveedor, int id_categoria,String nombre,String descripcion, String especificaciones, BigDecimal  precio, int stock, Blob imagen, int activo, Timestamp fechaRegistro) {
+
+
+	public Producto(int  id_componente, int id_proveedor, int id_categoria,String nombre,String descripcion, String especificaciones, BigDecimal  precio, int stock, byte[] imagen, int activo, Timestamp fechaRegistro) {
 		this. id_componente= id_componente;
 		this.id_proveedor=id_proveedor;
 		this.id_categoria=id_categoria;
@@ -85,13 +85,7 @@ public class Producto {
 		this.stock = stock;
 	}
 
-	public Blob getImagen() {
-		return imagen;
-	}
-
-	public void setImagen(Blob imagen) {
-		this.imagen = imagen;
-	}
+	
 
 	public int getActivo() {
 		return activo;
@@ -107,5 +101,13 @@ public class Producto {
 
 	public void setId_componente(int id_componente) {
 		this.id_componente = id_componente;
+	}
+
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
 	}
 }

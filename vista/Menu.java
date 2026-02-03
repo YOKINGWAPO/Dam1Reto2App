@@ -37,6 +37,7 @@ public class Menu extends JPanel {
 	private Opcion3 opcion3;
 	private Opcion4 opcion4;
 	private Opcion5 opcion5;
+	private int categoria;
 	
 	private ProductosDao productosDao;
 	
@@ -61,7 +62,7 @@ public class Menu extends JPanel {
 		PanelMenu.add(PanelMenu2, BorderLayout.NORTH);
 		PanelMenu2.setLayout(new BorderLayout(0, 0));
 
-		lblNombreUsu = new JLabel("New label");
+		lblNombreUsu = new JLabel("Usuario");
 		lblNombreUsu.setHorizontalAlignment(SwingConstants.CENTER);
 
 		PanelMenu2.add(lblNombreUsu, BorderLayout.WEST);
@@ -85,9 +86,9 @@ public class Menu extends JPanel {
 		btnSalir.setBorderPainted(false);
 
 		JPanel PanelLateral = new JPanel();
-		PanelLateral.setBackground(new Color(0, 102, 255));
+		PanelLateral.setBackground(new Color(140, 145, 145));
 		PanelMenu.add(PanelLateral, BorderLayout.WEST);
-		PanelLateral.setLayout(new FormLayout(new ColumnSpec[] {
+		FormLayout fl_PanelLateral = new FormLayout(new ColumnSpec[] {
 				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
 				ColumnSpec.decode("46px"),
 				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
@@ -97,7 +98,6 @@ public class Menu extends JPanel {
 				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
 				ColumnSpec.decode("46px"),
 				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("46px"),
 				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,},
 			new RowSpec[] {
 				FormSpecs.LINE_GAP_ROWSPEC,
@@ -127,32 +127,33 @@ public class Menu extends JPanel {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
-
-		JLabel lblNewLabel = new JLabel("MENU");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 19));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		PanelLateral.add(lblNewLabel, "6, 4");
-
-		btnOpcion1 = new JButton("Opcion 1");
-		btnOpcion1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		PanelLateral.add(btnOpcion1, "6, 8");
-
-		btnOpcion2 = new JButton("Opcion 2");
-		btnOpcion2.setFont(new Font("Tahoma", Font.BOLD, 18));
-		PanelLateral.add(btnOpcion2, "6, 12");
-
-		btnOpcion3 = new JButton("Opcion 3");
-		btnOpcion3.setFont(new Font("Tahoma", Font.BOLD, 18));
-		PanelLateral.add(btnOpcion3, "6, 16");
-
-		btnOpcion4 = new JButton("Opcion 4");
-		btnOpcion4.setFont(new Font("Tahoma", Font.BOLD, 18));
-		PanelLateral.add(btnOpcion4, "6, 20");
-
-		btnOpcion5 = new JButton("Opcion 5");
-		btnOpcion5.setFont(new Font("Tahoma", Font.BOLD, 18));
-		PanelLateral.add(btnOpcion5, "6, 24");
+				FormSpecs.DEFAULT_ROWSPEC,});
+		PanelLateral.setLayout(fl_PanelLateral);
+				
+						JLabel lblNewLabel = new JLabel("MENU");
+						lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 19));
+						lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+						PanelLateral.add(lblNewLabel, "2, 4, 7, 1");
+				
+						btnOpcion1 = new JButton("Componentes");
+						btnOpcion1.setFont(new Font("Tahoma", Font.BOLD, 16));
+						PanelLateral.add(btnOpcion1, "2, 8, 7, 1");
+		
+				btnOpcion2 = new JButton("Ordenadores");
+				btnOpcion2.setFont(new Font("Tahoma", Font.BOLD, 16));
+				PanelLateral.add(btnOpcion2, "2, 12, 7, 1");
+		
+				btnOpcion3 = new JButton("Perifericos");
+				btnOpcion3.setFont(new Font("Tahoma", Font.BOLD, 16));
+				PanelLateral.add(btnOpcion3, "2, 16, 7, 1");
+		
+				btnOpcion4 = new JButton("Consolas");
+				btnOpcion4.setFont(new Font("Tahoma", Font.BOLD, 16));
+				PanelLateral.add(btnOpcion4, "2, 20, 7, 1");
+		
+				btnOpcion5 = new JButton("Monitores");
+				btnOpcion5.setFont(new Font("Tahoma", Font.BOLD, 16));
+				PanelLateral.add(btnOpcion5, "2, 24, 7, 1");
 
 
 		PanelMenu.add(panelContenido, BorderLayout.CENTER);
@@ -187,7 +188,7 @@ public class Menu extends JPanel {
 	}
 	public void procesarProductos() {
 		productosDao = new ProductosDao();
-		lista=productosDao.obtenerProductos();
+		lista=productosDao.obtenerProductos(categoria);
 	}
 	public void ponerNombre(){
 		lblNombreUsu.setText(app.getUsuario().getNombre());

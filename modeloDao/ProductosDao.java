@@ -16,10 +16,12 @@ public class ProductosDao {
 
 	}
 
-	public List obtenerProductos() {
+	public List obtenerProductos(int categoria) {
+		
 		List<Producto> lista = new ArrayList<>();
 
 		String sql= "SELECT * FROM COMPONENTES WHERE activo = 1";
+		
 		int  id_componente;
 		int id_proveedor;
 		int id_categoria;
@@ -31,7 +33,7 @@ public class ProductosDao {
 		Blob imagen;
 		int activo;
 		Timestamp fechaRegistro;
-		
+		byte[] imgBytes;
 		try (Connection cone = Conexion.conectar()){
 			PreparedStatement ps = cone.prepareStatement(sql);
 
@@ -48,8 +50,13 @@ public class ProductosDao {
 				imagen = rs.getBlob("imagen");
 				activo = rs.getInt("activo");
 				fechaRegistro = rs.getTimestamp("fecha_alta");
+				if (imagen==null) {
+					
+				}
+				imgBytes = imagen.getBytes(1, (int) imagen.length());
 				
-				Producto producto= new Producto(id_componente, id_proveedor, id_categoria, nombre, descripcion, especificaciones, precio, stock, imagen, activo, fechaRegistro);
+				
+				Producto producto= new Producto(id_componente, id_proveedor, id_categoria, nombre, descripcion, especificaciones, precio, stock, imgBytes, activo, fechaRegistro);
 				lista.add(producto);
 
 			}
@@ -61,6 +68,8 @@ public class ProductosDao {
 		}
 		return null;
 	}
+	
+	
 
 
 }
