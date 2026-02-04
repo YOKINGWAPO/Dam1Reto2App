@@ -19,8 +19,6 @@ public class ProductosDao {
 	public List obtenerProductos(int categoria) {
 		
 		List<Producto> lista = new ArrayList<>();
-		String sql2="SELECT * FROM COMPONENTES WHERE activo = 1 AND id_categoria = ?";
-		
 		
 		String sql= "SELECT * FROM COMPONENTES WHERE activo = 1";
 		
@@ -29,16 +27,18 @@ public class ProductosDao {
 		int id_categoria;
 		String nombre;
 		String descripcion;
-		String especificaciones;
+		String tipoCompotente;
 		BigDecimal precio;
 		int stock;
 		Blob imagen;
 		int activo;
 		Timestamp fechaRegistro;
 		byte[] imgBytes;
+		
+		
 		try (Connection cone = Conexion.conectar()){
 			PreparedStatement ps = cone.prepareStatement(sql);
-
+			ResultSet rs2;
 			ResultSet rs = ps.executeQuery(); 
 			while (rs.next()) {
 				id_componente = rs.getInt("id_componente");
@@ -46,7 +46,7 @@ public class ProductosDao {
 				id_categoria = rs.getInt("id_categoria");
 				nombre = rs.getString("nombre");
 				descripcion = rs.getString("descripcion");
-				especificaciones = rs.getString("tipo_componente");
+				tipoCompotente = rs.getString("tipo_componente");
 				precio = rs.getBigDecimal("precio");
 				stock = rs.getInt("stock");
 				imagen = rs.getBlob("imagen");
@@ -55,11 +55,16 @@ public class ProductosDao {
 				if (imagen==null) {
 					
 				}
-				System.out.println(especificaciones);
+			
 				imgBytes = imagen.getBytes(1, (int) imagen.length());
 				
+				String sql3="SELECT * FROM "+tipoCompotente+" WHERE id_componente="+id_componente;
 				
+				ps = cone.prepareStatement(sql3);
+
+				rs2 = ps.executeQuery();
 				
+				//System.out.println(rs2.getString("id_componente"));
 				
 				Producto producto= new Producto(id_componente, id_proveedor, id_categoria, nombre, descripcion, precio, stock, imgBytes, activo, fechaRegistro);
 				lista.add(producto);
