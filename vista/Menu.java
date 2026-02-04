@@ -188,7 +188,7 @@ public class Menu extends JPanel {
 	}
 	public void procesarProductos() {
 		productosDao = new ProductosDao();
-		lista=productosDao.obtenerProductos(categoria);
+		lista=productosDao.obtenerProductos(1);
 	}
 	public void ponerNombre(){
 		lblNombreUsu.setText(app.getUsuario().getNombre());

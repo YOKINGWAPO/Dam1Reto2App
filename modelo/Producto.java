@@ -27,6 +27,7 @@ public class Producto {
 		this.stock=stock;
 		this.imagen=imagen;
 		this.activo=activo;
+		this.fechaRegistro=fechaRegistro;
 	}
 
 	public int getId_proveedor() {
