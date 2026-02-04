@@ -19,7 +19,9 @@ public class ProductosDao {
 	public List obtenerProductos(int categoria) {
 		
 		List<Producto> lista = new ArrayList<>();
-
+		String sql2="SELECT * FROM COMPONENTES WHERE activo = 1 AND id_categoria = ?";
+		
+		
 		String sql= "SELECT * FROM COMPONENTES WHERE activo = 1";
 		
 		int  id_componente;
@@ -44,7 +46,7 @@ public class ProductosDao {
 				id_categoria = rs.getInt("id_categoria");
 				nombre = rs.getString("nombre");
 				descripcion = rs.getString("descripcion");
-				especificaciones = rs.getString("especificaciones");
+				especificaciones = rs.getString("tipo_componente");
 				precio = rs.getBigDecimal("precio");
 				stock = rs.getInt("stock");
 				imagen = rs.getBlob("imagen");
@@ -53,10 +55,13 @@ public class ProductosDao {
 				if (imagen==null) {
 					
 				}
+				System.out.println(especificaciones);
 				imgBytes = imagen.getBytes(1, (int) imagen.length());
 				
 				
-				Producto producto= new Producto(id_componente, id_proveedor, id_categoria, nombre, descripcion, especificaciones, precio, stock, imgBytes, activo, fechaRegistro);
+				
+				
+				Producto producto= new Producto(id_componente, id_proveedor, id_categoria, nombre, descripcion, precio, stock, imgBytes, activo, fechaRegistro);
 				lista.add(producto);
 
 			}

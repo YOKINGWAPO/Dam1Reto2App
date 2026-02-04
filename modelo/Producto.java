@@ -16,13 +16,13 @@ public class Producto {
 	private Timestamp fechaRegistro;
 
 
-	public Producto(int  id_componente, int id_proveedor, int id_categoria,String nombre,String descripcion, String especificaciones, BigDecimal  precio, int stock, byte[] imagen, int activo, Timestamp fechaRegistro) {
+	public Producto(int  id_componente, int id_proveedor, int id_categoria,String nombre,String descripcion,  BigDecimal  precio, int stock, byte[] imagen, int activo, Timestamp fechaRegistro) {
 		this. id_componente= id_componente;
 		this.id_proveedor=id_proveedor;
 		this.id_categoria=id_categoria;
 		this.nombre=nombre;
 		this.descripcion=descripcion;
-		this.especificaciones=especificaciones;
+		//this.especificaciones=especificaciones;
 		this.precio=precio;
 		this.stock=stock;
 		this.imagen=imagen;
