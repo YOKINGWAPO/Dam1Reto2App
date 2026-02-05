@@ -87,7 +87,8 @@ public class App extends JFrame {
 		
 		Logeo=1;
 		try {
-			menu.procesarProductos();
+			menu.procesarCategorias();
+			//menu.procesarProductos();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

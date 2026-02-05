@@ -13,7 +13,7 @@ public class ProductosDao {
 
         List<Producto> lista = new ArrayList<>();
 
-        String call = "{ call pkg_productos.p_get_productos_categoria(?, ?) }";
+        String sql = "{ call pkg_productos.p_get_productos_categoria(?, ?) }";
 
         int id_componente;
         int id_proveedor;
@@ -29,7 +29,7 @@ public class ProductosDao {
         byte[] imgBytes;
 
         try (Connection cone = Conexion.conectar();
-             CallableStatement cs = cone.prepareCall(call)) {
+             CallableStatement cs = cone.prepareCall(sql)) {
 
             cs.setInt(1, categoria);
             cs.registerOutParameter(2, OracleTypes.CURSOR);
@@ -68,30 +68,127 @@ public class ProductosDao {
                             activo,
                             fechaRegistro
                     );
-                    System.out.println(rs.getString("cpu_socket"));
+                    //System.out.println(rs.getString("cpu_socket"));
                     
-                    // Si en tu clase Producto tienes setters/campos para specs, aquí los rellenas:
                     if ("GPU".equals(tipoCompotente)) {
-                        // Ejemplo (descomenta si existen esos setters/campos):
-                        // producto.setVramGb(rs.getInt("gpu_vram_gb"));
-                        // producto.setConsumoW(rs.getInt("gpu_consumo_w"));
-                        // producto.setChipset(rs.getString("gpu_chipset"));
+                    	int gpuVramGb;
+                    	int gpuConsumoW;
+                    	String gpuChipset;
+                    	
+                    	gpuVramGb=rs.getInt("gpu_vram_gb");
+                    	gpuConsumoW=rs.getInt("gpu_consumo_w");
+                    	gpuChipset=rs.getString("gpu_chipset");
+                    	
+                    	Producto producto2 = new Producto(producto,gpuVramGb,gpuConsumoW,gpuChipset);
+                    	lista.add(producto2);
+                    	
                     } else if ("CPU".equals(tipoCompotente)) {
-                        // producto.setSocket(rs.getString("cpu_socket"));
-                        // producto.setNucleos(rs.getInt("cpu_nucleos"));
-                        // producto.setHilos(rs.getInt("cpu_hilos"));
-                        // producto.setTdpW(rs.getInt("cpu_tdp_w"));
+                    	String cpuSocket;
+                    	int cpuNucleos;
+                    	int cpuHilos;
+                    	int cpuTdpW;
+                    	
+                    	cpuSocket=rs.getString("cpu_socket");
+                    	cpuNucleos=rs.getInt("cpu_nucleos");
+                    	cpuHilos=rs.getInt("cpu_hilos");
+                    	cpuTdpW=rs.getInt("cpu_tdp_w");
+                    	
+                    	Producto producto2 = new Producto(producto,cpuSocket,cpuNucleos,cpuHilos,cpuTdpW);
+                    	lista.add(producto2);
+
                     } else if ("RAM".equals(tipoCompotente)) {
-                        // producto.setRamCapacidadGb(rs.getInt("ram_capacidad_gb"));
-                        // producto.setRamTipo(rs.getString("ram_tipo"));
-                        // producto.setRamFrecuenciaMhz(rs.getInt("ram_frecuencia_mhz"));
+                    	int ramCapacidadGb;
+                    	String ramTipo;
+                    	int ramFrecuenciaMhz;
+                    	
+                    	ramCapacidadGb=rs.getInt("ram_capacidad_gb");
+                    	ramTipo=rs.getString("ram_tipo");
+                    	ramFrecuenciaMhz=rs.getInt("ram_frecuencia_mhz");
+                    	
+                    	Producto producto2 = new Producto(producto,ramCapacidadGb,ramTipo,ramFrecuenciaMhz);
+                    	lista.add(producto2);
+
                     } else if ("ALMACENAMIENTO".equals(tipoCompotente)) {
-                        // producto.setAlmTipo(rs.getString("alm_tipo"));
-                        // producto.setAlmCapacidadGb(rs.getInt("alm_capacidad_gb"));
-                        // producto.setAlmInterfaz(rs.getString("alm_interfaz"));
+                    	String almTipo;
+                    	int almCapacidadGb;
+                    	String almInterfaz;
+                    	
+                    	almTipo=rs.getString("alm_tipo");
+                    	almCapacidadGb=rs.getInt("alm_capacidad_gb");
+                    	almInterfaz=rs.getString("alm_interfaz");
+                    	
+                    	Producto producto2 = new Producto(producto,almTipo,almCapacidadGb,almInterfaz);
+                    	lista.add(producto2);
+
+                    } else if ("PLACA_BASE".equals(tipoCompotente)) {
+                    	String pbSocket;
+                    	String pbChipset;
+                    	String pbFormato;
+                    	String pbRamTipo;
+                    	
+                    	pbSocket=rs.getString("pb_socket");
+                    	pbChipset=rs.getString("pb_chipset");
+                    	pbFormato=rs.getString("pb_formato");
+                    	pbRamTipo=rs.getString("pb_ram_tipo");
+
+                    	Producto producto2 = new Producto(producto,pbSocket,pbChipset,pbFormato,pbRamTipo);
+                    	lista.add(producto2);
+
+                    } else if ("MONITOR".equals(tipoCompotente)) {
+                    	int monTamanoPulg;
+                    	String monResolucion;
+                    	int monHz;
+                    	String monPanel;
+                    	
+                    	monTamanoPulg=rs.getInt("mon_tamano_pulg");
+                    	monResolucion=rs.getString("mon_resolucion");
+                    	monHz=rs.getInt("mon_hz");
+                    	monPanel=rs.getString("mon_panel");
+                    	
+                    	Producto producto2 = new Producto(producto,monTamanoPulg,monResolucion,monHz,monPanel);
+                    	lista.add(producto2);
+                    	
+                    } else if ("CASCOS".equals(tipoCompotente)) {
+                    	String casConexion;
+                    	int casMicrofono;
+                    	
+                    	casConexion=rs.getString("cas_conexion");
+                    	casMicrofono=rs.getInt("cas_microfono");
+                    	
+                    	Producto producto2 = new Producto(producto,casConexion,casMicrofono);
+                    	lista.add(producto2);
+
+                    } else if ("CONSOLA".equals(tipoCompotente)) {
+                    	int conAlmacenamientoGb;
+                    	
+                    	conAlmacenamientoGb=rs.getInt("con_almacenamiento_gb");
+                    	
+                    	Producto producto2 = new Producto(producto,conAlmacenamientoGb);
+                    	lista.add(producto2);
+
+                    } else if ("PSU".equals(tipoCompotente)) {
+                    	String psuCertificacion;
+                    	int psuPotenciaW;
+                    	int psuModular;
+                    	
+                    	psuCertificacion=rs.getString("psu_certificacion");
+                    	psuPotenciaW=rs.getInt("psu_potencia_w");
+                    	psuModular=rs.getInt("psu_modular");
+                    	
+                    	Producto producto2 = new Producto(producto,psuCertificacion,psuPotenciaW,psuModular);
+                    	lista.add(producto2);
+
+                    } else if ("CAJA".equals(tipoCompotente)) {
+                    	String cajaFormatoSoportado;
+
+                    	cajaFormatoSoportado=rs.getString("caja_formato_soportado");
+                    	
+                    	Producto producto2 = new Producto(producto,cajaFormatoSoportado);
+                    	lista.add(producto2);
                     }
 
-                    lista.add(producto);
+
+                    //lista.add(producto);
                 }
             }
 

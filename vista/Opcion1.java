@@ -42,14 +42,15 @@ public class Opcion1 extends JPanel {
 	private JScrollPane cargarPanel;
 	private JPanel panelTargetas;
 	private CartaComponentes cartaComponentes; 
-	private ArrayList<CartaComponentes> arrayComponentes;
 	
+	private ArrayList<CartaComponentes> arrayComponentes;
+ 
 	
 	public Opcion1(Menu menu) {
 		this.menu=menu;
 		
 		setBackground(new Color(0, 255, 128));
-		this.menu=menu;
+		
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel titulo = new JPanel();
@@ -112,52 +113,52 @@ public class Opcion1 extends JPanel {
 		panelTargetas = new JPanel();
 		cargarPanel.setViewportView(panelTargetas);
 		panelTargetas.setLayout(new GridLayout(0, 2, 10, 10));
-		
-
       
 		System.out.println(menu.getLista().size()+"esto es lista");
 		menu.getLista().size();
 	
-		cargarTargetas();
-		
-		
-		
-		
+		arrayComponentes = new ArrayList<>();
+	
 	}
 
 
-	private void cargarTargetas() {
-		arrayComponentes = new ArrayList<>();
+	public void cargarTargetas(int activo) {
 		
-		for (int i = 0; i < menu.getLista().size(); i++) {
-			arrayComponentes.add(new CartaComponentes());
-			arrayComponentes.get(i).getLblNombreComp().setText(menu.getLista().get(i).getNombre());
-			arrayComponentes.get(i).getLblDescripcion().setText(menu.getLista().get(i).getDescripcion());
-			arrayComponentes.get(i).getLblDinero().setText(menu.getLista().get(i).getPrecio()+"");
-			arrayComponentes.get(i).getLblEspecificacion().setText(menu.getLista().get(i).getEspecificaciones());
-			//arrayComponentes.get(i).getLblImagen().
+		if (activo==1) {
+			for (int i = 0; i < menu.getLista().size(); i++) {
+				arrayComponentes.add(new CartaComponentes());
+				arrayComponentes.get(i).getLblNombreComp().setText(menu.getLista().get(i).getProducto().getNombre());
+				arrayComponentes.get(i).getLblDescripcion().setText(menu.getLista().get(i).getProducto().getDescripcion());
+				arrayComponentes.get(i).getLblDinero().setText(menu.getLista().get(i).getProducto().getPrecio()+"");
+				arrayComponentes.get(i).getLblEspecificacion().setText(menu.getLista().get(i).getProducto().getEspecificaciones());
+				
+				
+				 try {
+					 
+					
+					 byte[] img = menu.getLista().get(i).getProducto().getImagen();
+					 BufferedImage imagen = ImageIO.read(new ByteArrayInputStream(img));
+					 arrayComponentes.get(i).getLblImagen().setIcon(new ImageIcon(imagen));
+
+					
+					
+
+					
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+				panelTargetas.add(arrayComponentes.get(i));
 			
-			 try {
-				 
-				
-				 byte[] img = menu.getLista().get(i).getImagen();
-				 BufferedImage imagen = ImageIO.read(new ByteArrayInputStream(img));
-				 arrayComponentes.get(i).getLblImagen().setIcon(new ImageIcon(imagen));
+				//cartaComponentes.getLblNombreComp().setText("Hola");
 
-				
-				
-
-				
-			} catch (IOException e) {
-				
-				e.printStackTrace();
 			}
-			panelTargetas.add(arrayComponentes.get(i));
-			
-			//cartaComponentes.getLblNombreComp().setText("Hola");
-			
-			
+		} else {
+			for (int i = 0; i < menu.getLista().size(); i++) {
+				panelTargetas.remove(arrayComponentes.get(i));
+			}
 		}
+		
 		
 		
 	}

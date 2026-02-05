@@ -37,11 +37,15 @@ public class Menu extends JPanel {
 	private Opcion3 opcion3;
 	private Opcion4 opcion4;
 	private Opcion5 opcion5;
+	private Opcion6 opcion6;
 	private int categoria;
 	
 	private ProductosDao productosDao;
+	private CategoriasDao categoriasDao;
 	
-	List<Producto> lista = new ArrayList<>();
+	private List<Producto> lista = new ArrayList<>();
+	private List<Categoria> listaCategoria = new ArrayList<>();
+
 
 	private CardLayout layout = new CardLayout();
 	JPanel panelContenido = new JPanel(layout);
@@ -163,13 +167,6 @@ public class Menu extends JPanel {
 		eventosMenu = new EventosMenu(this, app);
 
 		
-
-
-		
-
-
-
-
 	}
 	public void cargarPaneles() {
 		opcion1=new Opcion1(this);
@@ -177,18 +174,28 @@ public class Menu extends JPanel {
 		opcion3=new Opcion3(this);
 		opcion4=new Opcion4(this);
 		opcion5=new Opcion5(this);
+		opcion6=new Opcion6(this);
 		
 		addPanel(opcion1, "Opcion1");
 		addPanel(opcion2, "Opcion2");
 		addPanel(opcion3, "Opcion3");
 		addPanel(opcion4, "Opcion4");
 		addPanel(opcion5, "Opcion5");
+		addPanel(opcion6, "Opcion6");
 
+		mostrar("Opcion6");
+	}
+	public void procesarProductos(int categoria) {
+		opcion1.cargarTargetas(0);
+		lista.clear();
+		productosDao = new ProductosDao();
+		lista=productosDao.obtenerProductos(categoria);
+		opcion1.cargarTargetas(1);
 		mostrar("Opcion1");
 	}
-	public void procesarProductos() {
-		productosDao = new ProductosDao();
-		lista=productosDao.obtenerProductos(1);
+	public void procesarCategorias() {
+		categoriasDao = new CategoriasDao();
+		listaCategoria=categoriasDao.obtenerCategorias();
 	}
 	public void ponerNombre(){
 		lblNombreUsu.setText(app.getUsuario().getNombre());
@@ -307,6 +314,12 @@ public class Menu extends JPanel {
 	}
 	public void setLista(List<Producto> lista) {
 		this.lista = lista;
+	}
+	public List<Categoria> getListaCategoria() {
+		return listaCategoria;
+	}
+	public void setListaCategoria(List<Categoria> listaCategoria) {
+		this.listaCategoria = listaCategoria;
 	}
 
 }
