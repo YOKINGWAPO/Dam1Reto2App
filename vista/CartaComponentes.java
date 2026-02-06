@@ -57,6 +57,10 @@ public class CartaComponentes extends JPanel {
 		lblDinero = new JLabel("0000€");
 		lblDinero.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(lblDinero);
+		
+		JLabel lblEuro = new JLabel("€");
+		lblEuro.setFont(new Font("Tahoma", Font.BOLD, 18));
+		panel.add(lblEuro);
 
 		btnAndir = new JButton("Añadir");
 		panel.add(btnAndir);
@@ -159,5 +163,4 @@ public class CartaComponentes extends JPanel {
 	public void setLblImagen(JLabel lblImagen) {
 		this.lblImagen = lblImagen;
 	}
-
 }

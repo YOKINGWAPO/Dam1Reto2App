@@ -4,6 +4,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 public class EventosCartaComponentes {
 	private CartaComponentes cartaComponentes;
@@ -16,14 +17,25 @@ public class EventosCartaComponentes {
 			@Override
 			public void componentResized(ComponentEvent e) {
 				
-//				ImageIcon icon = new ImageIcon(getClass().getResource("logo.png"));
-//				Image img = icon.getImage().getScaledInstance(
-//						cartaComponentes.getPanelImagen().getWidth(), 
-//						cartaComponentes.getPanelImagen().getHeight(),
-//						Image.SCALE_SMOOTH   
-//						);
-//
-//				cartaComponentes.getLblImagen().setIcon(new ImageIcon(img));
+				JLabel lbl = cartaComponentes.getLblImagen();
+
+				if (lbl != null && lbl.getIcon() instanceof ImageIcon) {
+
+				    int ancho = cartaComponentes.getPanelImagen().getWidth();
+				    int alto  = cartaComponentes.getPanelImagen().getHeight();
+
+				    if (ancho > 0 && alto > 0) {
+
+				        ImageIcon icon = (ImageIcon) lbl.getIcon();
+				        Image imgEscalada = icon.getImage().getScaledInstance(
+				                ancho,
+				                alto,
+				                Image.SCALE_SMOOTH
+				        );
+
+				        lbl.setIcon(new ImageIcon(imgEscalada));
+				    }
+				}
 
 			}
 

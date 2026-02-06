@@ -14,48 +14,23 @@ public class Producto {
 	private byte[] imagen;
 	private int activo;
 	private Timestamp fechaRegistro;
-
-	private int gpuVramGb;
-	private int gpuConsumoW;
-	private String gpuChipset;
-
-	private String cpuSocket;
-	private int cpuNucleos;
-	private int cpuHilos;
-	private int cpuTdpW;
-
-	private int ramCapacidadGb;
-	private String ramTipo;
-	private int ramFrecuenciaMhz;
-
-	private String almTipo;
-	private int almCapacidadGb;
-	private String almInterfaz;
-
-	private String pbSocket;
-	private String pbChipset;
-	private String pbFormato;
-	private String pbRamTipo;
-
-	private int monTamanoPulg;
-	private String monResolucion;
-	private int monHz;
-	private String monPanel;
-
-	private String casConexion;
-	private int casMicrofono;
-
-	private int conAlmacenamientoGb;
-
-	private int psuPotenciaW;
-	private String psuCertificacion;
-	private int psuModular;
-
-	private String cajaFormatoSoportado;
-
-	private Producto producto;
+	private String tipoComponente;
+	private String marca;
 	
-	public Producto(int  id_componente, int id_proveedor, int id_categoria,String nombre,String descripcion,  BigDecimal  precio, int stock, byte[] imagen, int activo, Timestamp fechaRegistro) {
+	private Cpu cpu;
+	private Gpu gpu;
+	private Ram ram;
+	private PlacaBase placaBase;
+	private Monitor monitor;
+	private Cascos cascos;
+	private Consolas consolas;
+	private Almacenamiento almacenamiento;
+	private Psu psu;
+	private Caja caja;
+
+	//private Producto producto;
+	
+	public Producto(int  id_componente, int id_proveedor, int id_categoria,String nombre,String descripcion,  BigDecimal  precio, int stock, byte[] imagen, int activo, Timestamp fechaRegistro,String marca,String tipoComponente) {
 		this. id_componente= id_componente;
 		this.id_proveedor=id_proveedor;
 		this.id_categoria=id_categoria;
@@ -67,88 +42,87 @@ public class Producto {
 		this.imagen=imagen;
 		this.activo=activo;
 		this.fechaRegistro=fechaRegistro;
+		this.marca=marca;
+		this.tipoComponente=tipoComponente;
 	}
-	public Producto(Producto producto, int gpuVramGb,int gpuConsumoW,String gpuChipset) {
-		//Gpu
-		this.producto=producto;
-		this.gpuVramGb=gpuVramGb;
-		this.gpuConsumoW=gpuConsumoW;
-		this.gpuChipset=gpuChipset;
-
-
-	}
-
-	public Producto(Producto producto, String cpuSocket,int cpuNucleos,int cpuHilos,int cpuTdpW) {
-		//Cpu
-		this.producto=producto;
-		this.cpuSocket=cpuSocket;
-		this.cpuNucleos=cpuNucleos;
-		this.cpuHilos=cpuHilos;
-		this.cpuTdpW=cpuTdpW;
-
-
-	}
-
-	public Producto(Producto producto, int ramCapacidadGb, String ramTipo,int ramFrecuenciaMhz) {
-		//Ram
-		this.producto=producto;
-		this.ramCapacidadGb=ramCapacidadGb;
-		this.ramTipo=ramTipo;
-		this.ramFrecuenciaMhz=ramFrecuenciaMhz;
-	}
-
-	public Producto(Producto producto, String almTipo, int almCapacidadGb, String almInterfaz) {
-		//Almacenamiento
-		this.producto=producto;
-		this.almTipo=almTipo;
-		this.almCapacidadGb=almCapacidadGb;
-		this.almInterfaz=almInterfaz;
-	}
-
-	public Producto(Producto producto, String pbSocket,String pbChipset,String pbFormato,String pbRamTipo) {
-		//Placa
-		this.producto=producto;
-		this.pbSocket=pbSocket;
-		this.pbChipset=pbChipset;
-		this.pbFormato=pbFormato;
-		this.pbRamTipo=pbRamTipo;
-
-	}
-
-	public Producto(Producto producto, int monTamanoPulg,String monResolucion,int monHz,String monPanel) {
-		//monitor
-		this.producto=producto;
-		this.monTamanoPulg=monTamanoPulg;
-		this.monResolucion=monResolucion;
-		this.monHz=monHz;
-		this.monPanel=monPanel;
-	}
-	public Producto(Producto producto, String casConexion,int casMicrofono) {
-		//Cascos
-		this.producto=producto;
-		this.casConexion=casConexion;
-		this.casMicrofono=casMicrofono;
-
-	}
-	public Producto(Producto producto, int conAlmacenamientoGb) {
-		//Consola
-		this.producto=producto;
-		this.conAlmacenamientoGb=conAlmacenamientoGb;
-	}
-
-	public Producto(Producto producto,String psuCertificacion, int psuPotenciaW, int psuModular) {
-		//Alimentacion
-		this.producto=producto;
-		this.psuCertificacion=psuCertificacion;
-		this.psuPotenciaW=psuPotenciaW;
-		this.psuModular=psuModular;
-
-	}
-	public Producto(Producto producto, String cajaFormatoSoportado) {
-		//Caja
-		this.producto=producto;
-		this.cajaFormatoSoportado=cajaFormatoSoportado;
-	}
+//	public Producto(Producto producto,Gpu gpu) {
+//		//Gpu
+//		this.producto=producto;
+//		this.gpu=gpu;
+//
+//
+//	}
+//
+//	public Producto(Producto producto,Cpu cpu) {
+//		//Cpu
+//		this.producto=producto;
+//		this.cpu=cpu;
+//
+//	}
+//
+//	public Producto(Producto producto, Ram ram) {
+//		//Ram
+//		this.producto=producto;
+//
+//		this.ram=ram;
+//	
+//	}
+//
+//	public Producto(Producto producto, Almacenamiento almacenamiento) {
+//		//Almacenamiento
+//		this.producto=producto;
+//
+//		this.almacenamiento=almacenamiento;
+//		
+//	}
+//
+//	public Producto(Producto producto, PlacaBase placaBase) {
+//		//Placa
+//		this.producto=producto;
+//
+//		this.placaBase=placaBase;
+//		
+//
+//	}
+//
+//	public Producto(Producto producto, Monitor monitor) {
+//		//monitor
+//		this.producto=producto;
+//
+//		this.monitor=monitor;
+//	}
+//	public Producto(Producto producto,Cascos cascos) {
+//		//Cascos
+//		this.producto=producto;
+//
+//		this.cascos=cascos;
+//	
+//
+//	}
+//	public Producto(Producto producto, Consolas consolas) {
+//		//Consola
+//		this.producto=producto;
+//
+//		this.consolas=consolas;
+//	
+//	}
+//
+//	public Producto(Producto producto,Psu psu) {
+//		//Alimentacion
+//		this.producto=producto;
+//
+//		this.psu=psu;
+//		
+//	}
+//	public Producto(Producto producto, Caja caja) {
+//		//Caja
+//		this.producto=producto;
+//
+//		this.caja=caja;
+//		
+//	}
+	
+	//Getters Setters
 	public int getId_componente() {
 		return id_componente;
 	}
@@ -215,180 +189,68 @@ public class Producto {
 	public void setFechaRegistro(Timestamp fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
-	public int getGpuVramGb() {
-		return gpuVramGb;
+	public Cpu getCpu() {
+		return cpu;
 	}
-	public void setGpuVramGb(int gpuVramGb) {
-		this.gpuVramGb = gpuVramGb;
+	public void setCpu(Cpu cpu) {
+		this.cpu = cpu;
 	}
-	public int getGpuConsumoW() {
-		return gpuConsumoW;
+	public Gpu getGpu() {
+		return gpu;
 	}
-	public void setGpuConsumoW(int gpuConsumoW) {
-		this.gpuConsumoW = gpuConsumoW;
+	public void setGpu(Gpu gpu) {
+		this.gpu = gpu;
 	}
-	public String getGpuChipset() {
-		return gpuChipset;
+	public Ram getRam() {
+		return ram;
 	}
-	public void setGpuChipset(String gpuChipset) {
-		this.gpuChipset = gpuChipset;
+	public void setRam(Ram ram) {
+		this.ram = ram;
 	}
-	public String getCpuSocket() {
-		return cpuSocket;
+	public PlacaBase getPlacaBase() {
+		return placaBase;
 	}
-	public void setCpuSocket(String cpuSocket) {
-		this.cpuSocket = cpuSocket;
+	public void setPlacaBase(PlacaBase placaBase) {
+		this.placaBase = placaBase;
 	}
-	public int getCpuNucleos() {
-		return cpuNucleos;
+	public Monitor getMonitor() {
+		return monitor;
 	}
-	public void setCpuNucleos(int cpuNucleos) {
-		this.cpuNucleos = cpuNucleos;
+	public void setMonitor(Monitor monitor) {
+		this.monitor = monitor;
 	}
-	public int getCpuHilos() {
-		return cpuHilos;
+	public Cascos getCascos() {
+		return cascos;
 	}
-	public void setCpuHilos(int cpuHilos) {
-		this.cpuHilos = cpuHilos;
+	public void setCascos(Cascos cascos) {
+		this.cascos = cascos;
 	}
-	public int getCpuTdpW() {
-		return cpuTdpW;
+	public Consolas getConsolas() {
+		return consolas;
 	}
-	public void setCpuTdpW(int cpuTdpW) {
-		this.cpuTdpW = cpuTdpW;
+	public void setConsolas(Consolas consolas) {
+		this.consolas = consolas;
 	}
-	public int getRamCapacidadGb() {
-		return ramCapacidadGb;
+	public Almacenamiento getAlmacenamiento() {
+		return almacenamiento;
 	}
-	public void setRamCapacidadGb(int ramCapacidadGb) {
-		this.ramCapacidadGb = ramCapacidadGb;
+	public void setAlmacenamiento(Almacenamiento almacenamiento) {
+		this.almacenamiento = almacenamiento;
 	}
-	public String getRamTipo() {
-		return ramTipo;
+	public Psu getPsu() {
+		return psu;
 	}
-	public void setRamTipo(String ramTipo) {
-		this.ramTipo = ramTipo;
+	public void setPsu(Psu psu) {
+		this.psu = psu;
 	}
-	public int getRamFrecuenciaMhz() {
-		return ramFrecuenciaMhz;
+	public Caja getCaja() {
+		return caja;
 	}
-	public void setRamFrecuenciaMhz(int ramFrecuenciaMhz) {
-		this.ramFrecuenciaMhz = ramFrecuenciaMhz;
+	public void setCaja(Caja caja) {
+		this.caja = caja;
 	}
-	public String getAlmTipo() {
-		return almTipo;
-	}
-	public void setAlmTipo(String almTipo) {
-		this.almTipo = almTipo;
-	}
-	public int getAlmCapacidadGb() {
-		return almCapacidadGb;
-	}
-	public void setAlmCapacidadGb(int almCapacidadGb) {
-		this.almCapacidadGb = almCapacidadGb;
-	}
-	public String getAlmInterfaz() {
-		return almInterfaz;
-	}
-	public void setAlmInterfaz(String almInterfaz) {
-		this.almInterfaz = almInterfaz;
-	}
-	public String getPbSocket() {
-		return pbSocket;
-	}
-	public void setPbSocket(String pbSocket) {
-		this.pbSocket = pbSocket;
-	}
-	public String getPbChipset() {
-		return pbChipset;
-	}
-	public void setPbChipset(String pbChipset) {
-		this.pbChipset = pbChipset;
-	}
-	public String getPbFormato() {
-		return pbFormato;
-	}
-	public void setPbFormato(String pbFormato) {
-		this.pbFormato = pbFormato;
-	}
-	public String getPbRamTipo() {
-		return pbRamTipo;
-	}
-	public void setPbRamTipo(String pbRamTipo) {
-		this.pbRamTipo = pbRamTipo;
-	}
-	public int getMonTamanoPulg() {
-		return monTamanoPulg;
-	}
-	public void setMonTamanoPulg(int monTamanoPulg) {
-		this.monTamanoPulg = monTamanoPulg;
-	}
-	public String getMonResolucion() {
-		return monResolucion;
-	}
-	public void setMonResolucion(String monResolucion) {
-		this.monResolucion = monResolucion;
-	}
-	public int getMonHz() {
-		return monHz;
-	}
-	public void setMonHz(int monHz) {
-		this.monHz = monHz;
-	}
-	public String getMonPanel() {
-		return monPanel;
-	}
-	public void setMonPanel(String monPanel) {
-		this.monPanel = monPanel;
-	}
-	public String getCasConexion() {
-		return casConexion;
-	}
-	public void setCasConexion(String casConexion) {
-		this.casConexion = casConexion;
-	}
-	public int getCasMicrofono() {
-		return casMicrofono;
-	}
-	public void setCasMicrofono(int casMicrofono) {
-		this.casMicrofono = casMicrofono;
-	}
-	public int getConAlmacenamientoGb() {
-		return conAlmacenamientoGb;
-	}
-	public void setConAlmacenamientoGb(int conAlmacenamientoGb) {
-		this.conAlmacenamientoGb = conAlmacenamientoGb;
-	}
-	public int getPsuPotenciaW() {
-		return psuPotenciaW;
-	}
-	public void setPsuPotenciaW(int psuPotenciaW) {
-		this.psuPotenciaW = psuPotenciaW;
-	}
-	public String getPsuCertificacion() {
-		return psuCertificacion;
-	}
-	public void setPsuCertificacion(String psuCertificacion) {
-		this.psuCertificacion = psuCertificacion;
-	}
-	public int getPsuModular() {
-		return psuModular;
-	}
-	public void setPsuModular(int psuModular) {
-		this.psuModular = psuModular;
-	}
-	public String getCajaFormatoSoportado() {
-		return cajaFormatoSoportado;
-	}
-	public void setCajaFormatoSoportado(String cajaFormatoSoportado) {
-		this.cajaFormatoSoportado = cajaFormatoSoportado;
-	}
-	public Producto getProducto() {
-		return producto;
-	}
-	public void setProducto(Producto producto) {
-		this.producto = producto;
-	} 
+
+	
 
 }
 

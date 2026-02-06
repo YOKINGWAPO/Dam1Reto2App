@@ -20,6 +20,7 @@ public class ProductosDao {
         int id_categoria;
         String nombre;
         String descripcion;
+        String marca;
         String tipoCompotente;
         BigDecimal precio;
         int stock;
@@ -27,7 +28,7 @@ public class ProductosDao {
         int activo;
         Timestamp fechaRegistro;
         byte[] imgBytes;
-
+      
         try (Connection cone = Conexion.conectar();
              CallableStatement cs = cone.prepareCall(sql)) {
 
@@ -48,7 +49,7 @@ public class ProductosDao {
                     stock = rs.getInt("stock");
                     activo = rs.getInt("activo");
                     fechaRegistro = rs.getTimestamp("fecha_alta");
-
+                    marca = rs.getString("id_Marca");
                     imagen = rs.getBlob("imagen");
                     if (imagen != null) {
                         imgBytes = imagen.getBytes(1, (int) imagen.length());
@@ -66,7 +67,10 @@ public class ProductosDao {
                             stock,
                             imgBytes,
                             activo,
-                            fechaRegistro
+                            fechaRegistro,
+                            marca,
+                            tipoCompotente
+                            
                     );
                     //System.out.println(rs.getString("cpu_socket"));
                     
@@ -79,8 +83,9 @@ public class ProductosDao {
                     	gpuConsumoW=rs.getInt("gpu_consumo_w");
                     	gpuChipset=rs.getString("gpu_chipset");
                     	
-                    	Producto producto2 = new Producto(producto,gpuVramGb,gpuConsumoW,gpuChipset);
-                    	lista.add(producto2);
+                    	Gpu gpu = new Gpu(gpuVramGb,gpuConsumoW,gpuChipset);
+                    	producto.setGpu(gpu);
+                    	lista.add(producto);
                     	
                     } else if ("CPU".equals(tipoCompotente)) {
                     	String cpuSocket;
@@ -93,8 +98,9 @@ public class ProductosDao {
                     	cpuHilos=rs.getInt("cpu_hilos");
                     	cpuTdpW=rs.getInt("cpu_tdp_w");
                     	
-                    	Producto producto2 = new Producto(producto,cpuSocket,cpuNucleos,cpuHilos,cpuTdpW);
-                    	lista.add(producto2);
+                    	Cpu cpu=new Cpu(cpuSocket,cpuNucleos,cpuHilos,cpuTdpW);
+                    	producto.setCpu(cpu);
+                    	lista.add(producto);
 
                     } else if ("RAM".equals(tipoCompotente)) {
                     	int ramCapacidadGb;
@@ -105,8 +111,9 @@ public class ProductosDao {
                     	ramTipo=rs.getString("ram_tipo");
                     	ramFrecuenciaMhz=rs.getInt("ram_frecuencia_mhz");
                     	
-                    	Producto producto2 = new Producto(producto,ramCapacidadGb,ramTipo,ramFrecuenciaMhz);
-                    	lista.add(producto2);
+                    	Ram ram = new Ram (ramCapacidadGb,ramTipo,ramFrecuenciaMhz);
+                    	producto.setRam(ram);
+                    	lista.add(producto);
 
                     } else if ("ALMACENAMIENTO".equals(tipoCompotente)) {
                     	String almTipo;
@@ -117,8 +124,9 @@ public class ProductosDao {
                     	almCapacidadGb=rs.getInt("alm_capacidad_gb");
                     	almInterfaz=rs.getString("alm_interfaz");
                     	
-                    	Producto producto2 = new Producto(producto,almTipo,almCapacidadGb,almInterfaz);
-                    	lista.add(producto2);
+                    	Almacenamiento alm = new Almacenamiento(almTipo,almCapacidadGb,almInterfaz);
+                    	producto.setAlmacenamiento(alm);
+                    	lista.add(producto);
 
                     } else if ("PLACA_BASE".equals(tipoCompotente)) {
                     	String pbSocket;
@@ -131,8 +139,9 @@ public class ProductosDao {
                     	pbFormato=rs.getString("pb_formato");
                     	pbRamTipo=rs.getString("pb_ram_tipo");
 
-                    	Producto producto2 = new Producto(producto,pbSocket,pbChipset,pbFormato,pbRamTipo);
-                    	lista.add(producto2);
+                    	PlacaBase placaBase= new PlacaBase(pbSocket,pbChipset,pbFormato,pbRamTipo);
+                    	producto.setPlacaBase(placaBase);
+                    	lista.add(producto);
 
                     } else if ("MONITOR".equals(tipoCompotente)) {
                     	int monTamanoPulg;
@@ -145,8 +154,9 @@ public class ProductosDao {
                     	monHz=rs.getInt("mon_hz");
                     	monPanel=rs.getString("mon_panel");
                     	
-                    	Producto producto2 = new Producto(producto,monTamanoPulg,monResolucion,monHz,monPanel);
-                    	lista.add(producto2);
+                    	Monitor monitor = new Monitor(monTamanoPulg,monResolucion,monHz,monPanel);
+                    	producto.setMonitor(monitor);
+                    	lista.add(producto);
                     	
                     } else if ("CASCOS".equals(tipoCompotente)) {
                     	String casConexion;
@@ -155,16 +165,18 @@ public class ProductosDao {
                     	casConexion=rs.getString("cas_conexion");
                     	casMicrofono=rs.getInt("cas_microfono");
                     	
-                    	Producto producto2 = new Producto(producto,casConexion,casMicrofono);
-                    	lista.add(producto2);
+                    	Cascos cascos = new Cascos(casConexion,casMicrofono);
+                    	producto.setCascos(cascos);
+                    	lista.add(producto);
 
                     } else if ("CONSOLA".equals(tipoCompotente)) {
                     	int conAlmacenamientoGb;
                     	
                     	conAlmacenamientoGb=rs.getInt("con_almacenamiento_gb");
                     	
-                    	Producto producto2 = new Producto(producto,conAlmacenamientoGb);
-                    	lista.add(producto2);
+                    	Consolas consolas = new Consolas(conAlmacenamientoGb);
+                    	producto.setConsolas(consolas);
+                    	lista.add(producto);
 
                     } else if ("PSU".equals(tipoCompotente)) {
                     	String psuCertificacion;
@@ -175,16 +187,18 @@ public class ProductosDao {
                     	psuPotenciaW=rs.getInt("psu_potencia_w");
                     	psuModular=rs.getInt("psu_modular");
                     	
-                    	Producto producto2 = new Producto(producto,psuCertificacion,psuPotenciaW,psuModular);
-                    	lista.add(producto2);
+                    	Psu psu = new Psu(psuCertificacion,psuPotenciaW,psuModular);
+                    	producto.setPsu(psu);
+                    	lista.add(producto);
 
                     } else if ("CAJA".equals(tipoCompotente)) {
                     	String cajaFormatoSoportado;
 
                     	cajaFormatoSoportado=rs.getString("caja_formato_soportado");
                     	
-                    	Producto producto2 = new Producto(producto,cajaFormatoSoportado);
-                    	lista.add(producto2);
+                    	Caja caja = new Caja(cajaFormatoSoportado);
+                    	producto.setCaja(caja);
+                    	lista.add(producto);
                     }
 
 

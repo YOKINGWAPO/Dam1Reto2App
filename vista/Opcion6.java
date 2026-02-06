@@ -37,6 +37,7 @@ public class Opcion6 extends JPanel {
 		
 		for (int i = 0; i < menu.getListaCategoria().size(); i++) {
 			arrayCategorias.add(new CartaCategoria(menu));
+			
 			arrayCategorias.get(i).getLblCategoria().setText(menu.getListaCategoria().get(i).getNombre());
 			
 			arrayCategorias.get(i).setIdCategoria(menu.getListaCategoria().get(i).getId_categoria());

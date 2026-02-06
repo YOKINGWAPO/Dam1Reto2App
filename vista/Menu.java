@@ -147,15 +147,15 @@ public class Menu extends JPanel {
 				btnOpcion2.setFont(new Font("Tahoma", Font.BOLD, 16));
 				PanelLateral.add(btnOpcion2, "2, 12, 7, 1");
 		
-				btnOpcion3 = new JButton("Perifericos");
+				btnOpcion3 = new JButton("Clientes");
 				btnOpcion3.setFont(new Font("Tahoma", Font.BOLD, 16));
 				PanelLateral.add(btnOpcion3, "2, 16, 7, 1");
 		
-				btnOpcion4 = new JButton("Consolas");
+				btnOpcion4 = new JButton("Pedidos");
 				btnOpcion4.setFont(new Font("Tahoma", Font.BOLD, 16));
 				PanelLateral.add(btnOpcion4, "2, 20, 7, 1");
 		
-				btnOpcion5 = new JButton("Monitores");
+				btnOpcion5 = new JButton("Manual");
 				btnOpcion5.setFont(new Font("Tahoma", Font.BOLD, 16));
 				PanelLateral.add(btnOpcion5, "2, 24, 7, 1");
 
@@ -186,11 +186,11 @@ public class Menu extends JPanel {
 		mostrar("Opcion6");
 	}
 	public void procesarProductos(int categoria) {
-		opcion1.cargarTargetas(0);
+		opcion1.cargarTargetas(0,categoria);
 		lista.clear();
 		productosDao = new ProductosDao();
 		lista=productosDao.obtenerProductos(categoria);
-		opcion1.cargarTargetas(1);
+		opcion1.cargarTargetas(1,categoria);
 		mostrar("Opcion1");
 	}
 	public void procesarCategorias() {
