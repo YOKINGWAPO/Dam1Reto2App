@@ -108,7 +108,7 @@ public class Opcion1 extends JPanel {
 	}
 
 
-	public void cargarTargetas(int activo, int categoria) {
+	public void cargarTargetas(int activo, String categoria) {
 		
 		
 			
@@ -121,14 +121,14 @@ public class Opcion1 extends JPanel {
 				arrayComponentes.get(i).getLblNombreComp().setText(menu.getLista().get(i).getNombre());
 				arrayComponentes.get(i).getLblDescripcion().setText(menu.getLista().get(i).getDescripcion());
 				arrayComponentes.get(i).getLblDinero().setText(menu.getLista().get(i).getPrecio()+"");
-				if (categoria==2) {
+				if ("GPU".equals(categoria)) {
 					//panelFiltrosPrincipal.add(new Filtros());
 					arrayComponentes.get(i).getLblEspecificacion().setText(
 							"Chipset: "+menu.getLista().get(i).getGpu().getGpuChipset()
 							+" Consumo W:"+menu.getLista().get(i).getGpu().getGpuConsumoW()
 							+" Vram: "+menu.getLista().get(i).getGpu().getGpuVramGb()+"GB");
 				}	
-				if (categoria==1) {
+				if ("CPU".equals(categoria)) {
 					
 					arrayComponentes.get(i).getLblEspecificacion().setText(
 							"Nucleos: "+menu.getLista().get(i).getCpu().getCpuNucleos()
@@ -136,7 +136,7 @@ public class Opcion1 extends JPanel {
 							+" Socket: "+menu.getLista().get(i).getCpu().getCpuSocket()
 							+" Consumo W: "+menu.getLista().get(i).getCpu().getCpuTdpW());
 				}
-				if (categoria==3) {
+				if ("PLACA_BASE".equals(categoria)) {
 					
 					arrayComponentes.get(i).getLblEspecificacion().setText(
 							"Socket: "+menu.getLista().get(i).getPlacaBase().getPbSocket()
@@ -144,43 +144,43 @@ public class Opcion1 extends JPanel {
 							+" Tipo de ram: "+menu.getLista().get(i).getPlacaBase().getPbRamTipo()
 							+" Chipset: "+menu.getLista().get(i).getPlacaBase().getPbChipset());
 				}
-				if (categoria==4) {
+				if ("RAM".equals(categoria)) {
 					
 					arrayComponentes.get(i).getLblEspecificacion().setText(
 							"Tipo: "+menu.getLista().get(i).getRam().getRamTipo()
 							+" Capacidad:"+menu.getLista().get(i).getRam().getRamCapacidadGb()
 							+" Frecuencia: "+menu.getLista().get(i).getRam().getRamFrecuenciaMhz());
 				}
-				if (categoria==5) {
+				if ("ALMACENAMIENTO".equals(categoria)) {
 					
 					arrayComponentes.get(i).getLblEspecificacion().setText(
 							"Capacidad GB: "+menu.getLista().get(i).getAlmacenamiento().getAlmCapacidadGb()
 							+" Tipo:"+menu.getLista().get(i).getAlmacenamiento().getAlmTipo());
 				}
-				if (categoria==6) {
+				if ("MONITOR".equals(categoria)) {
 					
 					arrayComponentes.get(i).getLblEspecificacion().setText(
 							"Resolucion: "+menu.getLista().get(i).getMonitor().getMonResolucion()
 							+" Tamaño:"+menu.getLista().get(i).getMonitor().getMonTamanoPulg()
 							+" Pulgadas "+" Hz:"+menu.getLista().get(i).getMonitor().getMonHz());
 				}
-				if (categoria==7) {
+				if ("CASCOS".equals(categoria)) {
 					
 					arrayComponentes.get(i).getLblEspecificacion().setText(
 							"Tipo: "+menu.getLista().get(i).getCascos().getCasConexion()
 							+" Microfono:"+menu.getLista().get(i).getCascos().getCasMicrofono());
 				}
-				if (categoria==8) {
+				if ("CONSOLA".equals(categoria)) {
 					
 					arrayComponentes.get(i).getLblEspecificacion().setText(
 							"Almacenamiento: "+menu.getLista().get(i).getConsolas().getConAlmacenamientoGb()+" Gb");
 				}
-				if (categoria==21) {
+				if ("PSU".equals(categoria)) {
 					
 					arrayComponentes.get(i).getLblEspecificacion().setText(
 							"Certificado: "+menu.getLista().get(i).getPsu().getPsuCertificacion()+" Potencia:"+menu.getLista().get(i).getPsu().getPsuPotenciaW()+" W" +" Modular:"+menu.getLista().get(i).getPsu().getPsuModular());
 				}
-				if (categoria==22) {
+				if ("CAJA".equals(categoria)) {
 					
 					arrayComponentes.get(i).getLblEspecificacion().setText("Formato: "+menu.getLista().get(i).getCaja().getCajaFormatoSoportado());
 				}

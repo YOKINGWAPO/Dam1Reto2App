@@ -17,9 +17,9 @@ public class EventoCartaCategoria {
 		cartaCategoria.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				menu.procesarProductos(cartaCategoria.getIdCategoria());
+				menu.procesarProductos(cartaCategoria.getTipoComponente());
 				//cartaCategoria.getMenu().procesarProductos(cartaCategoria.getIdCategoria());
-				System.out.println(cartaCategoria.getIdCategoria());
+				//System.out.println(cartaCategoria.getTipoComponente());
 			}
 		});
 

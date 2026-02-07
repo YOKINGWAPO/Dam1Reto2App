@@ -17,7 +17,7 @@ public class CartaCategoria extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel lblCategoria;
-	private int idCategoria;
+	private String tipoComponente;
 	private EventoCartaCategoria eventoCartaCategoria;
 	private Menu menu;
 	private JPanel panelCategoria;
@@ -48,11 +48,12 @@ public class CartaCategoria extends JPanel {
 	public void setLblCategoria(JLabel lblCategoria) {
 		this.lblCategoria = lblCategoria;
 	}
-	public int getIdCategoria() {
-		return idCategoria;
+	
+	public String getTipoComponente() {
+		return tipoComponente;
 	}
-	public void setIdCategoria(int idCategoria) {
-		this.idCategoria = idCategoria;
+	public void setTipoComponente(String tipoComponente) {
+		this.tipoComponente = tipoComponente;
 	}
 	public EventoCartaCategoria getEventoCartaCategoria() {
 		return eventoCartaCategoria;

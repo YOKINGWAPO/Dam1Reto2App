@@ -109,8 +109,6 @@ public class Inicio extends JPanel {
 		//conexion=new Conexion();
 		
 		
-		
-		
 	}
 	
 	

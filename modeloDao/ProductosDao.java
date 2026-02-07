@@ -9,15 +9,17 @@ public class ProductosDao {
 
     public ProductosDao() { }
 
-    public List<Producto> obtenerProductos(int categoria) {
-
+    public List<Producto> obtenerProductos(String tipoComponente) {
+    	System.out.println(tipoComponente);
         List<Producto> lista = new ArrayList<>();
 
-        String sql = "{ call pkg_productos.p_get_productos_categoria(?, ?) }";
+        String sql = "{ call almitech.pkg_productos.p_get_productos_tipo(?, ?) }";
+
+        
 
         int id_componente;
         int id_proveedor;
-        int id_categoria;
+        
         String nombre;
         String descripcion;
         String marca;
@@ -32,7 +34,7 @@ public class ProductosDao {
         try (Connection cone = Conexion.conectar();
              CallableStatement cs = cone.prepareCall(sql)) {
 
-            cs.setInt(1, categoria);
+        	cs.setString(1, tipoComponente);
             cs.registerOutParameter(2, OracleTypes.CURSOR);
             cs.execute();
 
@@ -41,7 +43,6 @@ public class ProductosDao {
 
                     id_componente = rs.getInt("id_componente");
                     id_proveedor = rs.getInt("id_proveedor");
-                    id_categoria = rs.getInt("id_categoria");
                     nombre = rs.getString("nombre");
                     descripcion = rs.getString("descripcion");
                     tipoCompotente = rs.getString("tipo_componente");
@@ -49,7 +50,7 @@ public class ProductosDao {
                     stock = rs.getInt("stock");
                     activo = rs.getInt("activo");
                     fechaRegistro = rs.getTimestamp("fecha_alta");
-                    marca = rs.getString("id_Marca");
+                    marca = rs.getString("marca");
                     imagen = rs.getBlob("imagen");
                     if (imagen != null) {
                         imgBytes = imagen.getBytes(1, (int) imagen.length());
@@ -60,7 +61,6 @@ public class ProductosDao {
                     Producto producto = new Producto(
                             id_componente,
                             id_proveedor,
-                            id_categoria,
                             nombre,
                             descripcion,
                             precio,

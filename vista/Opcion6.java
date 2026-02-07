@@ -39,8 +39,8 @@ public class Opcion6 extends JPanel {
 			arrayCategorias.add(new CartaCategoria(menu));
 			
 			arrayCategorias.get(i).getLblCategoria().setText(menu.getListaCategoria().get(i).getNombre());
+			arrayCategorias.get(i).setTipoComponente(menu.getListaCategoria().get(i).getNombre());
 			
-			arrayCategorias.get(i).setIdCategoria(menu.getListaCategoria().get(i).getId_categoria());
 			
 			 try {
 				 
@@ -55,7 +55,6 @@ public class Opcion6 extends JPanel {
 			}
 			 cargaPanel.add(arrayCategorias.get(i));
 			
-			//cartaComponentes.getLblNombreComp().setText("Hola");
 			
 			
 		}

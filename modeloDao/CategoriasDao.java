@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,31 +21,68 @@ public class CategoriasDao {
 
 		List<Categoria> listaCategoria = new ArrayList<>();
 		
-		int id_categoria;
-		String nombre;
-		String descripcion;
 		
-		Blob imagen;
+		String nombre;
 		byte[] imgBytes;
 
 		try (Connection cone = Conexion.conectar()){
-			sql = "SELECT * FROM CATEGORIAS";
+			sql = "SELECT DISTINCT tipo_componente\r\n"
+					+ "FROM almitech.componentes\r\n"
+					+ "ORDER BY tipo_componente";
 			ps = cone.prepareStatement(sql);
 			rs = ps.executeQuery(); 
 
 			while (rs.next()) {
-				id_categoria=rs.getInt("id_categoria");
-				nombre=rs.getString("nombre");
-				descripcion=rs.getString("descripcion");
-				imagen=rs.getBlob("imagen");
 				
-				if (imagen != null) {
-                    imgBytes = imagen.getBytes(1, (int) imagen.length());
-                } else {
-                    imgBytes = new byte[0]; 
-                }
+				nombre=rs.getString("tipo_componente");
 				
-				Categoria categoria= new Categoria(id_categoria,nombre,descripcion,imgBytes);
+				//imagen=rs.getBlob("imagen");
+				 imgBytes = new byte[0]; 
+				try {
+					if ("GPU".equals(nombre)) {
+					    imgBytes = getClass().getResourceAsStream("gpu.png").readAllBytes();
+
+					} else if ("CPU".equals(nombre)) {
+					    imgBytes = getClass().getResourceAsStream("cpu.png").readAllBytes();
+
+					} else if ("PLACA_BASE".equals(nombre)) {
+					    imgBytes = getClass().getResourceAsStream("placaBase.png").readAllBytes();
+
+					} else if ("RAM".equals(nombre)) {
+					    imgBytes = getClass().getResourceAsStream("ram.png").readAllBytes();
+
+					} else if ("ALMACENAMIENTO".equals(nombre)) {
+					    imgBytes = getClass().getResourceAsStream("ssd.png").readAllBytes();
+
+					} else if ("PSU".equals(nombre)) {
+					    imgBytes = getClass().getResourceAsStream("psu.png").readAllBytes();
+
+					} else if ("CAJA".equals(nombre)) {
+					    imgBytes = getClass().getResourceAsStream("caja.png").readAllBytes();
+
+					} else if ("MONITOR".equals(nombre)) {
+					    imgBytes = getClass().getResourceAsStream("monitor.png").readAllBytes();
+
+					} else if ("CONSOLA".equals(nombre)) {
+					    imgBytes = getClass().getResourceAsStream("consola.png").readAllBytes();
+
+					} else if ("CASCOS".equals(nombre)) {
+					    imgBytes = getClass().getResourceAsStream("cascos.png").readAllBytes();
+
+					} else {
+					    imgBytes = new byte[0];
+					}
+
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				
+                   
+               
+				
+				Categoria categoria= new Categoria(nombre,imgBytes);
 				//System.out.println(id_categoria);
 				listaCategoria.add(categoria);
 			}

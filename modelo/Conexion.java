@@ -30,7 +30,7 @@ public class Conexion {
 	}
 	
 	public static Connection conectar() throws SQLException {
-       
+		
 			return DriverManager.getConnection(url, user, password);
 		
     }

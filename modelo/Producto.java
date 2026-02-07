@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 public class Producto {
 	private int  id_componente;
 	private int id_proveedor;
-	private int id_categoria;
 	private String nombre;
 	private String descripcion;
 	private String especificaciones;
@@ -30,10 +29,10 @@ public class Producto {
 
 	//private Producto producto;
 	
-	public Producto(int  id_componente, int id_proveedor, int id_categoria,String nombre,String descripcion,  BigDecimal  precio, int stock, byte[] imagen, int activo, Timestamp fechaRegistro,String marca,String tipoComponente) {
+	public Producto(int  id_componente, int id_proveedor ,String nombre,String descripcion,  BigDecimal  precio, int stock, byte[] imagen, int activo, Timestamp fechaRegistro,String marca,String tipoComponente) {
 		this. id_componente= id_componente;
 		this.id_proveedor=id_proveedor;
-		this.id_categoria=id_categoria;
+		
 		this.nombre=nombre;
 		this.descripcion=descripcion;
 		//this.especificaciones=especificaciones;
@@ -135,12 +134,7 @@ public class Producto {
 	public void setId_proveedor(int id_proveedor) {
 		this.id_proveedor = id_proveedor;
 	}
-	public int getId_categoria() {
-		return id_categoria;
-	}
-	public void setId_categoria(int id_categoria) {
-		this.id_categoria = id_categoria;
-	}
+	
 	public String getNombre() {
 		return nombre;
 	}

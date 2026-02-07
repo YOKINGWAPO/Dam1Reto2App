@@ -17,75 +17,49 @@ public class UsuarioDao {
 	}
 
 	public Usuario comprobarLogin() {
-		String Nombre;
-		String Contrasena;
-		String sql;
-		int idUsuario;
-		String nombreUsu;
-		String email;
-		String tipoUsu;
-		int Activo;
-		Timestamp fechaRegistro;
-		ResultSet rs;
 
-		PreparedStatement ps;
-		sql="SELECT id_usuario FROM usuarios WHERE (nombre_usuario = ? OR email = ?) AND password_hash = ?";
+	    String sql =
+	    "SELECT id_usuario, nombre_usuario, email, tipo_usuario, activo, fecha_registro " +
+	    "FROM almitech.usuario " +
+	    "WHERE (nombre_usuario = ? OR email = ?) AND password_hash = ?";
 
-		Nombre = eventosInicio.getInicio().getTxtUsuario().getText();
-		Contrasena = String.valueOf(eventosInicio.getInicio().getTextPass().getPassword());
-		//System.out.println(Nombre);
-		//System.out.println(Contrasena);
+	    String nombre = eventosInicio.getInicio().getTxtUsuario().getText();
+	    String contrasena = String.valueOf(
+	            eventosInicio.getInicio().getTextPass().getPassword()
+	    );
 
-		try (Connection cone = Conexion.conectar()){
-			ps = cone.prepareStatement(sql);
-			ps.setString(1, Nombre);
-			ps.setString(2, Nombre);
-			ps.setString(3, Contrasena);
+	    try (Connection cone = Conexion.conectar();
+	         PreparedStatement ps = cone.prepareStatement(sql)) {
 
-			rs = ps.executeQuery(); 
+	        ps.setString(1, nombre);
+	        ps.setString(2, nombre);
+	        ps.setString(3, contrasena);
 
-			if (rs.next()) {
+	        ResultSet rs = ps.executeQuery();
 
-				idUsuario = rs.getInt("id_usuario");
+	        if (rs.next()) {
 
+	            int idUsuario = rs.getInt("id_usuario");
+	            String nombreUsu = rs.getString("nombre_usuario");
+	            String email = rs.getString("email");
+	            String tipoUsu = rs.getString("tipo_usuario");
+	            int activo = rs.getInt("activo");
+	            Timestamp fechaRegistro = rs.getTimestamp("fecha_registro");
 
+	            if (activo == 0) {
+	                return null;
+	            }
 
-				sql= "SELECT id_usuario, nombre_usuario, email, tipo_usuario, activo, fecha_registro FROM USUARIOS WHERE id_usuario = ?";
+	            return new Usuario(idUsuario, nombreUsu, email, tipoUsu, activo, fechaRegistro);
+	        }
 
-				try (Connection cone2 = Conexion.conectar()){
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 
-					ps = cone2.prepareStatement(sql);
-					ps.setInt(1, idUsuario);
-
-
-					rs = ps.executeQuery(); 
-					if (rs.next()) {
-
-						nombreUsu = rs.getString("nombre_usuario");
-						email = rs.getString("email");
-						tipoUsu = rs.getString("tipo_usuario");
-						Activo = rs.getInt("activo");
-						fechaRegistro = rs.getTimestamp("fecha_registro");
-						usuario = new Usuario(idUsuario, nombreUsu, email, tipoUsu, Activo, fechaRegistro);
-						if (Activo==0) {
-							return null;
-						}
-						return usuario;
-					}
-					
-					
-				} catch (Exception e) {
-
-				}
-				//return rs.getInt("id_usuario");
-			}
-		} catch (Exception e) {
-
-		}
-		//setContentPane(menu);
-
-		return null;
+	    return null;
 	}
+
 	public Usuario datosUsuario() {
 
 		return usuario;
