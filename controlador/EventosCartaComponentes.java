@@ -1,46 +1,43 @@
 import java.awt.Image;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class EventosCartaComponentes {
-	private CartaComponentes cartaComponentes;
 
-	public EventosCartaComponentes(CartaComponentes cartaComponentes) {
-		this.cartaComponentes=cartaComponentes;
+    private CartaComponentes carta;
+    private ImageIcon original;
 
-		cartaComponentes.getPanelPrincipal().addComponentListener(new ComponentAdapter() {
+    public EventosCartaComponentes(CartaComponentes carta) {
+        this.carta = carta;
 
-			@Override
-			public void componentResized(ComponentEvent e) {
-				
-				JLabel lbl = cartaComponentes.getLblImagen();
+        JLabel lbl = carta.getLblImagen();
+        if (lbl.getIcon() instanceof ImageIcon) {
+            original = (ImageIcon) lbl.getIcon();
+        }
 
-				if (lbl != null && lbl.getIcon() instanceof ImageIcon) {
+        carta.getPanelImagen().addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                escalar();
+            }
+        });
+    }
 
-				    int ancho = cartaComponentes.getPanelImagen().getWidth();
-				    int alto  = cartaComponentes.getPanelImagen().getHeight();
+    private void escalar() {
+        if (original == null) return;
 
-				    if (ancho > 0 && alto > 0) {
+        int anchoPanel = carta.getPanelImagen().getWidth();
+        if (anchoPanel <= 0) return;
 
-				        ImageIcon icon = (ImageIcon) lbl.getIcon();
-				        Image imgEscalada = icon.getImage().getScaledInstance(
-				                ancho,
-				                alto,
-				                Image.SCALE_SMOOTH
-				        );
+        Image img = original.getImage();
+        Image escalada = img.getScaledInstance(
+                anchoPanel,
+                -1,
+                Image.SCALE_SMOOTH
+        );
 
-				        lbl.setIcon(new ImageIcon(imgEscalada));
-				    }
-				}
-
-			}
-
-		});
-
-
-	}
+        carta.getLblImagen().setIcon(new ImageIcon(escalada));
+    }
 }

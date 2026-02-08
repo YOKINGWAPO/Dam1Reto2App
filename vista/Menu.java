@@ -38,6 +38,7 @@ public class Menu extends JPanel {
 	private Opcion4 opcion4;
 	private Opcion5 opcion5;
 	private Opcion6 opcion6;
+	private Opcion7 opcion7;
 	private CrearCliente crearCliente;
 	private int categoria;
 	
@@ -176,6 +177,7 @@ public class Menu extends JPanel {
 		opcion4=new Opcion4(this);
 		opcion5=new Opcion5(this);
 		opcion6=new Opcion6(this);
+		opcion7=new Opcion7(this);
 		crearCliente= new CrearCliente(this);
 		
 		addPanel(opcion1, "Opcion1");
@@ -184,6 +186,7 @@ public class Menu extends JPanel {
 		addPanel(opcion4, "Opcion4");
 		addPanel(opcion5, "Opcion5");
 		addPanel(opcion6, "Opcion6");
+		addPanel(opcion7, "Opcion7");
 		addPanel(crearCliente, "crearCliente");
 
 		mostrar("Opcion6");
@@ -329,6 +332,18 @@ public class Menu extends JPanel {
 	}
 	public void setListaCategoria(List<Categoria> listaCategoria) {
 		this.listaCategoria = listaCategoria;
+	}
+	public Opcion4 getOpcion4() {
+		return opcion4;
+	}
+	public void setOpcion4(Opcion4 opcion4) {
+		this.opcion4 = opcion4;
+	}
+	public Opcion7 getOpcion7() {
+		return opcion7;
+	}
+	public void setOpcion7(Opcion7 opcion7) {
+		this.opcion7 = opcion7;
 	}
 
 }

@@ -30,56 +30,57 @@ public class Opcion3 extends JPanel {
     private JLabel lblClientesSinPedido;
     private JLabel lblNewLabel_1;
     private JLabel lblUltimoClienteRegistrado;
+    private int idUsuario;
+    private JButton btnCrearPedido;
 
     public Opcion3(Menu menu) {
-    	
+
         this.menu = menu;
         setLayout(new BorderLayout(0, 0));
 
-       
         JPanel panelTop = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lblTitulo = new JLabel("Clientes:");
         lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 20));
         panelTop.add(lblTitulo);
         add(panelTop, BorderLayout.NORTH);
-        
+
         lblClienteTotales = new JLabel("totales");
         lblClienteTotales.setFont(new Font("Tahoma", Font.BOLD, 20));
         panelTop.add(lblClienteTotales);
-        
+
         JSeparator separator = new JSeparator();
         panelTop.add(separator);
-        
+
         lblNewLabel = new JLabel("Clientes con pedidos:");
         lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
         panelTop.add(lblNewLabel);
-        
-        lblClienteConPedidos = new JLabel("6");
+
+        lblClienteConPedidos = new JLabel("0");
         lblClienteConPedidos.setFont(new Font("Tahoma", Font.BOLD, 20));
         panelTop.add(lblClienteConPedidos);
-        
+
         JLabel lblClientesSinPedidos = new JLabel("Clientes Sin pedidos:");
         lblClientesSinPedidos.setFont(new Font("Tahoma", Font.BOLD, 20));
         panelTop.add(lblClientesSinPedidos);
-        
-        lblClientesSinPedido = new JLabel("6");
+
+        lblClientesSinPedido = new JLabel("0");
         lblClientesSinPedido.setFont(new Font("Tahoma", Font.BOLD, 20));
         panelTop.add(lblClientesSinPedido);
-        
+
         lblNewLabel_1 = new JLabel("Ultimo Cliente Registrado:");
         lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 20));
         panelTop.add(lblNewLabel_1);
-        
-        lblUltimoClienteRegistrado = new JLabel("utlimo");
+
+        lblUltimoClienteRegistrado = new JLabel("ultimo");
         lblUltimoClienteRegistrado.setFont(new Font("Tahoma", Font.BOLD, 20));
         panelTop.add(lblUltimoClienteRegistrado);
 
-        
-        String[] columnas = { "Nombre", "Apellidos", "Email", "Teléfono", "Dirección" };
+      
+        String[] columnas = { "ID", "Nombre", "Apellidos", "Email", "Teléfono", "Dirección" };
         model = new DefaultTableModel(columnas, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false; // solo lectura
+                return false;
             }
         };
 
@@ -93,35 +94,36 @@ public class Opcion3 extends JPanel {
         DefaultTableCellRenderer center = new DefaultTableCellRenderer();
         center.setHorizontalAlignment(SwingConstants.CENTER);
 
-        
-        tablaClientes.getColumnModel().getColumn(3).setCellRenderer(center);
-
+        tablaClientes.getColumnModel().getColumn(0).setCellRenderer(center); 
+        tablaClientes.getColumnModel().getColumn(4).setCellRenderer(center); 
        
-        tablaClientes.getColumnModel().getColumn(0).setPreferredWidth(120); 
-        tablaClientes.getColumnModel().getColumn(1).setPreferredWidth(140); 
-        tablaClientes.getColumnModel().getColumn(2).setPreferredWidth(220); 
-        tablaClientes.getColumnModel().getColumn(3).setPreferredWidth(90);  
-        tablaClientes.getColumnModel().getColumn(4).setPreferredWidth(260); 
+        tablaClientes.getColumnModel().getColumn(0).setPreferredWidth(50);   
+        tablaClientes.getColumnModel().getColumn(1).setPreferredWidth(120);  
+        tablaClientes.getColumnModel().getColumn(2).setPreferredWidth(140); 
+        tablaClientes.getColumnModel().getColumn(3).setPreferredWidth(220); 
+        tablaClientes.getColumnModel().getColumn(4).setPreferredWidth(90);   
+        tablaClientes.getColumnModel().getColumn(5).setPreferredWidth(260);  
 
         JScrollPane scrollPane = new JScrollPane(tablaClientes);
         add(scrollPane, BorderLayout.CENTER);
 
+        JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         
-        JPanel panelBottom = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        btnCrearPedido = new JButton("Crear Pedido");
+        panelBoton.add(btnCrearPedido);
         btnCrearNuevoCliente = new JButton("Crear Nuevo Cliente");
-        panelBottom.add(btnCrearNuevoCliente);
-        add(panelBottom, BorderLayout.SOUTH);
-        
+        panelBoton.add(btnCrearNuevoCliente);
+
         btnVerPedidosCliente = new JButton("Ver pedidos");
-        panelBottom.add(btnVerPedidosCliente);
+        panelBoton.add(btnVerPedidosCliente);
 
-       
-       cargarClientesEnTabla();
-       
-       eventosOpcion3 = new EventosOpcion3(this);
-       
+        add(panelBoton, BorderLayout.SOUTH);
+
+        cargarClientesEnTabla();
+
+        eventosOpcion3 = new EventosOpcion3(this);
+        
     }
-
   
 
     public void cargarClientesEnTabla() {
@@ -135,6 +137,7 @@ public class Opcion3 extends JPanel {
     	model.setRowCount(0); 
 		for (int i = 0; i < listaCliente.size(); i++) {
 			model.addRow(new Object[]{
+					listaCliente.get(i).getIdCliente(),
 					listaCliente.get(i).getNombre(),
 					listaCliente.get(i).getApellidos(),
 					listaCliente.get(i).getEmail(),
@@ -261,4 +264,24 @@ public class Opcion3 extends JPanel {
     public JTable getTablaClientes() {
         return tablaClientes;
     }
+
+
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+
+	public JButton getBtnCrearPedido() {
+		return btnCrearPedido;
+	}
+
+
+	public void setBtnCrearPedido(JButton btnCrearPedido) {
+		this.btnCrearPedido = btnCrearPedido;
+	}
 }

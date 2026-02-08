@@ -1,112 +1,87 @@
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import java.awt.Graphics;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import java.awt.GridLayout;
-import java.awt.Image;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.TitledBorder;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.FlowLayout;
-import java.awt.CardLayout;
+import javax.swing.*;
+import javax.swing.border.*;
+import java.awt.*;
 
 public class CartaComponentes extends JPanel {
 
-	private static final long serialVersionUID = 1L;
-	private JLabel lblNombreComp;
-	private Opcion1 opcion1;
-	private JPanel panelImagen;
-	private JLabel lblDescripcion;
-	private JLabel lblEspecificacion;
-	private JLabel lblDinero;
-	private JButton btnAndir;
-	private Image logo;
-	private JLabel lblImagen;
-	private EventosCartaComponentes eventosCartaComponentes;
-	
-	public CartaComponentes() {
-		setBorder(new LineBorder(new Color(0, 0, 0)));
-		setLayout(new BorderLayout(0, 0));
+    private static final long serialVersionUID = 1L;
 
-		lblNombreComp = new JLabel("Titulo");
-		lblNombreComp.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNombreComp.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblNombreComp, BorderLayout.NORTH);
+    private JLabel lblNombreComp;
+    private JPanel panelImagen;
+    private JLabel lblDescripcion;
+    private JLabel lblEspecificacion;
+    private JLabel lblDinero;
+    private JLabel lblImagen;
 
-		JPanel panel = new JPanel();
-		add(panel, BorderLayout.SOUTH);
+    private EventosCartaComponentes eventosCartaComponentes;
 
-		JLabel lblPrecio = new JLabel("Precio:");
-		lblPrecio.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 18));
-		panel.add(lblPrecio);
+    public CartaComponentes() {
+        setOpaque(true);
+        setBackground(Color.WHITE);
+        setBorder(new CompoundBorder(
+                new LineBorder(new Color(220, 220, 220), 1, true),
+                new EmptyBorder(12, 12, 12, 12)
+        ));
+        setLayout(new BorderLayout(10, 10));
 
-		lblDinero = new JLabel("0000€");
-		lblDinero.setFont(new Font("Tahoma", Font.BOLD, 18));
-		panel.add(lblDinero);
-		
-		JLabel lblEuro = new JLabel("€");
-		lblEuro.setFont(new Font("Tahoma", Font.BOLD, 18));
-		panel.add(lblEuro);
+        lblNombreComp = new JLabel("Título", SwingConstants.CENTER);
+        lblNombreComp.setFont(new Font("SansSerif", Font.BOLD, 18));
+        add(lblNombreComp, BorderLayout.NORTH);
 
-		btnAndir = new JButton("Añadir");
-		panel.add(btnAndir);
+        JPanel center = new JPanel(new BorderLayout(8, 8));
+        center.setOpaque(false);
+        add(center, BorderLayout.CENTER);
 
-		JPanel panel_1 = new JPanel();
-		add(panel_1, BorderLayout.CENTER);
+        panelImagen = new JPanel(new BorderLayout());
+        panelImagen.setBackground(new Color(245, 246, 248));
+        panelImagen.setBorder(new LineBorder(new Color(230, 230, 230), 1, true));
+        panelImagen.setPreferredSize(new Dimension(320, 170));
 
-		panelImagen = new JPanel();
-		
-		lblImagen = new JLabel("");
-		lblImagen.setHorizontalAlignment(SwingConstants.CENTER);
+        lblImagen = new JLabel("", SwingConstants.CENTER);
+        panelImagen.add(lblImagen, BorderLayout.CENTER);
 
-		JPanel panel_2 = new JPanel();
-		panel_2.setLayout(new GridLayout(2, 1, 0, 0));
-				
-						lblDescripcion = new JLabel("Descripcion");
-						panel_2.add(lblDescripcion);
-		
-				lblEspecificacion = new JLabel("Especificaciones");
-				panel_2.add(lblEspecificacion);
-				GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-				gl_panel_1.setHorizontalGroup(
-					gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addComponent(panelImagen, GroupLayout.PREFERRED_SIZE, 427, GroupLayout.PREFERRED_SIZE)
-						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 427, GroupLayout.PREFERRED_SIZE)
-				);
-				gl_panel_1.setVerticalGroup(
-					gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addComponent(panelImagen, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE)
-							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 249, GroupLayout.PREFERRED_SIZE))
-				);
-				
-				panelImagen.setLayout(new CardLayout(0, 0));
-				panelImagen.add(lblImagen, "name_8896516453600");
-				panel_1.setLayout(gl_panel_1);
-		eventosCartaComponentes = new EventosCartaComponentes(this);
-		
-	}
+        center.add(panelImagen, BorderLayout.NORTH);
 
-	
-	
-	public JPanel getPanelPrincipal() {
-		return this;
-	}
-	
+        JPanel info = new JPanel();
+        info.setOpaque(false);
+        info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
+
+        lblDescripcion = new JLabel("<html><div style='width:320px;'>Descripción</div></html>");
+        lblDescripcion.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        lblDescripcion.setForeground(new Color(60, 60, 60));
+
+        lblEspecificacion = new JLabel("<html><div style='width:320px;'>Especificaciones</div></html>");
+        lblEspecificacion.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        lblEspecificacion.setForeground(new Color(90, 90, 90));
+
+        info.add(lblDescripcion);
+        info.add(Box.createVerticalStrut(6));
+        info.add(lblEspecificacion);
+
+        center.add(info, BorderLayout.CENTER);
+
+        JPanel footer = new JPanel(new BorderLayout());
+        footer.setOpaque(false);
+        add(footer, BorderLayout.SOUTH);
+
+        JPanel price = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
+        price.setOpaque(false);
+
+        JLabel lblPrecio = new JLabel("Precio:");
+        lblPrecio.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        lblPrecio.setForeground(new Color(110, 110, 110));
+
+        lblDinero = new JLabel("0000€");
+        lblDinero.setFont(new Font("SansSerif", Font.BOLD, 18));
+        lblDinero.setForeground(new Color(20, 20, 20));
+
+        price.add(lblPrecio);
+        price.add(lblDinero);
+
+        footer.add(price, BorderLayout.WEST);
+
+        eventosCartaComponentes = new EventosCartaComponentes(this);
+    }
 
 	public JLabel getLblNombreComp() {
 		return lblNombreComp;
@@ -148,13 +123,7 @@ public class CartaComponentes extends JPanel {
 		this.lblDinero = lblDinero;
 	}
 
-	public JButton getBtnAndir() {
-		return btnAndir;
-	}
-
-	public void setBtnAndir(JButton btnAndir) {
-		this.btnAndir = btnAndir;
-	}
+	
 
 	public JLabel getLblImagen() {
 		return lblImagen;
@@ -163,4 +132,18 @@ public class CartaComponentes extends JPanel {
 	public void setLblImagen(JLabel lblImagen) {
 		this.lblImagen = lblImagen;
 	}
+
+	public EventosCartaComponentes getEventosCartaComponentes() {
+		return eventosCartaComponentes;
+	}
+
+	public void setEventosCartaComponentes(EventosCartaComponentes eventosCartaComponentes) {
+		this.eventosCartaComponentes = eventosCartaComponentes;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+   
 }

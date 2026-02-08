@@ -89,8 +89,8 @@ public class EventosMenu {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("4");
-				menu.mostrar("Opcion4");
+				System.out.println("7");
+				menu.mostrar("Opcion7");
 
 			}
 		});
