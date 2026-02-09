@@ -27,6 +27,7 @@ public class ProductosDao {
         BigDecimal precio;
         int stock;
         Blob imagen;
+        String imagenUrl;
         int activo;
         Timestamp fechaRegistro;
         byte[] imgBytes;
@@ -51,12 +52,9 @@ public class ProductosDao {
                     activo = rs.getInt("activo");
                     fechaRegistro = rs.getTimestamp("fecha_alta");
                     marca = rs.getString("marca");
-                    imagen = rs.getBlob("imagen");
-                    if (imagen != null) {
-                        imgBytes = imagen.getBytes(1, (int) imagen.length());
-                    } else {
-                        imgBytes = new byte[0]; 
-                    }
+                    //imagen = rs.getBlob("imagen");
+                    imagenUrl = rs.getString("imagen_url");
+                    
 
                     Producto producto = new Producto(
                             id_componente,
@@ -65,7 +63,7 @@ public class ProductosDao {
                             descripcion,
                             precio,
                             stock,
-                            imgBytes,
+                            imagenUrl,
                             activo,
                             fechaRegistro,
                             marca,

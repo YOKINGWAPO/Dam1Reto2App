@@ -1,8 +1,13 @@
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JButton;
 
 public class EventosMenu {
 	private Menu menu;
@@ -68,14 +73,14 @@ public class EventosMenu {
 
 			}
 		});
-		menu.getBtnOpcion2().addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("2");
-				menu.mostrar("Opcion2");
-			}
-		});
+//		menu.getBtnOpcion2().addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				System.out.println("2");
+//				menu.mostrar("Opcion2");
+//			}
+//		});
 		menu.getBtnOpcion3().addActionListener(new ActionListener() {
 
 			@Override
@@ -103,7 +108,33 @@ public class EventosMenu {
 
 			}
 		});
+		
+		
+		
 	}
+	
+//	public void estilizarBoton(JButton btn) {
+//	    btn.setFont(new Font("Tahoma", Font.BOLD, 20));
+//	    btn.setBackground(new Color(60, 63, 65));
+//	    btn.setForeground(Color.WHITE);
+//	    btn.setFocusPainted(false);
+//	    btn.setBorderPainted(false);
+//	    btn.setOpaque(true);
+//	    btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+//
+//	    
+//	    btn.addMouseListener(new java.awt.event.MouseAdapter() {
+//	        @Override
+//	        public void mouseEntered(java.awt.event.MouseEvent e) {
+//	            btn.setBackground(new Color(80, 83, 85));
+//	        }
+//
+//	        @Override
+//	        public void mouseExited(java.awt.event.MouseEvent e) {
+//	            btn.setBackground(new Color(60, 63, 65));
+//	        }
+//	    });
+//	}
 	
 	
 

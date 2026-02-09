@@ -14,6 +14,7 @@ public class CartaComponentes extends JPanel {
     private JLabel lblImagen;
 
     private EventosCartaComponentes eventosCartaComponentes;
+    private JLabel lblNewLabel;
 
     public CartaComponentes() {
         setOpaque(true);
@@ -79,6 +80,10 @@ public class CartaComponentes extends JPanel {
         price.add(lblDinero);
 
         footer.add(price, BorderLayout.WEST);
+        
+        lblNewLabel = new JLabel("€");
+        lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+        price.add(lblNewLabel);
 
         eventosCartaComponentes = new EventosCartaComponentes(this);
     }

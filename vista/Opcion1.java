@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -34,6 +35,12 @@ import javax.swing.JTree;
 import javax.swing.JSlider;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
+
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 
 
@@ -81,17 +88,6 @@ public class Opcion1 extends JPanel {
 		panelFiltrosPrincipal = new JPanel();
 		panel.add(panelFiltrosPrincipal, BorderLayout.WEST);
 		panelFiltrosPrincipal.setLayout(new GridLayout(10, 1, 0, 0));
-
-		JLabel lblNewLabel_2 = new JLabel("Precio");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		panelFiltrosPrincipal.add(lblNewLabel_2);
-
-		JSlider slider = new JSlider();
-		panelFiltrosPrincipal.add(slider);
-
-		JSlider slider_1 = new JSlider();
-		panelFiltrosPrincipal.add(slider_1);
 
 		cargarPanel = new JScrollPane();
 		panel.add(cargarPanel, BorderLayout.CENTER);
@@ -184,17 +180,32 @@ public class Opcion1 extends JPanel {
 					
 					arrayComponentes.get(i).getLblEspecificacion().setText("Formato: "+menu.getLista().get(i).getCaja().getCajaFormatoSoportado());
 				}
+				String urlImagen = menu.getLista().get(i).getImagenUrl();
+
 				try {
+				    if (urlImagen == null || urlImagen.isBlank()) {
+				        arrayComponentes.get(i).getLblImagen().setIcon(null); 
+				        return; 
+				    }
 
-					byte[] img = menu.getLista().get(i).getImagen();
-					BufferedImage imagen = ImageIO.read(new ByteArrayInputStream(img));
-					
-					arrayComponentes.get(i).getLblImagen().setIcon(new ImageIcon(imagen));
-					
+				    URL url = new URL(urlImagen);
+
+				    BufferedImage imagen = ImageIO.read(url); 
+				    if (imagen == null) {
+				        System.out.println("No se pudo leer la imagen (formato no soportado o respuesta no es imagen): " + urlImagen);
+				        arrayComponentes.get(i).getLblImagen().setIcon(null); 
+				        return; 
+				    }
+
+				    arrayComponentes.get(i).getLblImagen().setIcon(new ImageIcon(imagen));
+
 				} catch (IOException e) {
-
-					e.printStackTrace();
+				    System.out.println("Error cargando imagen: " + urlImagen);
+				    e.printStackTrace();
+				    arrayComponentes.get(i).getLblImagen().setIcon(null); 
 				}
+
+
 				panelTargetas.add(arrayComponentes.get(i));
 
 				//cartaComponentes.getLblNombreComp().setText("Hola");

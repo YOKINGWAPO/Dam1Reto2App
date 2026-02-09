@@ -3,7 +3,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion {
-	 private static String url = "jdbc:oracle:thin:@localhost:1521/XEPDB1";
+	 private static String url = "jdbc:oracle:thin:@192.168.0.229:1521/XEPDB1";
      private static String user = "conexion";
      private static String password = "Almi123";
      

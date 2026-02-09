@@ -30,7 +30,6 @@ public class Menu extends JPanel {
 	private JButton btnOpcion5;
 	private JButton btnOpcion4;
 	private JButton btnOpcion3;
-	private JButton btnOpcion2;
 	private JButton btnOpcion1;
 	private Opcion1 opcion1;
 	private Opcion2 opcion2;
@@ -144,29 +143,29 @@ public class Menu extends JPanel {
 						btnOpcion1 = new JButton("Componentes");
 						btnOpcion1.setFont(new Font("Tahoma", Font.BOLD, 16));
 						PanelLateral.add(btnOpcion1, "2, 8, 7, 1");
-		
-				btnOpcion2 = new JButton("Ordenadores");
-				btnOpcion2.setFont(new Font("Tahoma", Font.BOLD, 16));
-				PanelLateral.add(btnOpcion2, "2, 12, 7, 1");
-		
-				btnOpcion3 = new JButton("Clientes");
-				btnOpcion3.setFont(new Font("Tahoma", Font.BOLD, 16));
-				PanelLateral.add(btnOpcion3, "2, 16, 7, 1");
-		
-				btnOpcion4 = new JButton("Pedidos");
-				btnOpcion4.setFont(new Font("Tahoma", Font.BOLD, 16));
-				PanelLateral.add(btnOpcion4, "2, 20, 7, 1");
-		
-				btnOpcion5 = new JButton("Manual");
-				btnOpcion5.setFont(new Font("Tahoma", Font.BOLD, 16));
-				PanelLateral.add(btnOpcion5, "2, 24, 7, 1");
+				
+						btnOpcion3 = new JButton("Clientes");
+						btnOpcion3.setFont(new Font("Tahoma", Font.BOLD, 16));
+						PanelLateral.add(btnOpcion3, "2, 12, 7, 1");
+				
+						btnOpcion4 = new JButton("Pedidos");
+						btnOpcion4.setFont(new Font("Tahoma", Font.BOLD, 16));
+						PanelLateral.add(btnOpcion4, "2, 16, 8, 1");
+				
+						btnOpcion5 = new JButton("Manual");
+						btnOpcion5.setFont(new Font("Tahoma", Font.BOLD, 16));
+						PanelLateral.add(btnOpcion5, "2, 20, 7, 1");
 
 
 		PanelMenu.add(panelContenido, BorderLayout.CENTER);
 
-
-
 		eventosMenu = new EventosMenu(this, app);
+//		eventosMenu.estilizarBoton(btnOpcion1);
+//		eventosMenu.estilizarBoton(btnOpcion3);
+//		eventosMenu.estilizarBoton(btnOpcion4);
+//		eventosMenu.estilizarBoton(btnOpcion5);
+
+		
 
 		
 	}
@@ -295,15 +294,7 @@ public class Menu extends JPanel {
 	}
 
 
-	public JButton getBtnOpcion2() {
-		return btnOpcion2;
-	}
-
-
-	public void setBtnOpcion2(JButton btnOpcion2) {
-		this.btnOpcion2 = btnOpcion2;
-	}
-
+	
 
 	public JButton getBtnOpcion1() {
 		return btnOpcion1;

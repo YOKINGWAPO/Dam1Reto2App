@@ -10,7 +10,7 @@ public class Producto {
 	private String especificaciones;
 	private BigDecimal precio;
 	private int stock;
-	private byte[] imagen;
+	private String imagenUrl;
 	private int activo;
 	private Timestamp fechaRegistro;
 	private String tipoComponente;
@@ -29,7 +29,7 @@ public class Producto {
 
 	//private Producto producto;
 	
-	public Producto(int  id_componente, int id_proveedor ,String nombre,String descripcion,  BigDecimal  precio, int stock, byte[] imagen, int activo, Timestamp fechaRegistro,String marca,String tipoComponente) {
+	public Producto(int  id_componente, int id_proveedor ,String nombre,String descripcion,  BigDecimal  precio, int stock, String imagenUrl, int activo, Timestamp fechaRegistro,String marca,String tipoComponente) {
 		this. id_componente= id_componente;
 		this.id_proveedor=id_proveedor;
 		
@@ -38,7 +38,7 @@ public class Producto {
 		//this.especificaciones=especificaciones;
 		this.precio=precio;
 		this.stock=stock;
-		this.imagen=imagen;
+		this.imagenUrl=imagenUrl;
 		this.activo=activo;
 		this.fechaRegistro=fechaRegistro;
 		this.marca=marca;
@@ -165,12 +165,7 @@ public class Producto {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-	public byte[] getImagen() {
-		return imagen;
-	}
-	public void setImagen(byte[] imagen) {
-		this.imagen = imagen;
-	}
+
 	public int getActivo() {
 		return activo;
 	}
@@ -242,6 +237,14 @@ public class Producto {
 	}
 	public void setCaja(Caja caja) {
 		this.caja = caja;
+	}
+
+	public String getImagenUrl() {
+		return imagenUrl;
+	}
+
+	public void setImagenUrl(String imagenUrl) {
+		this.imagenUrl = imagenUrl;
 	}
 
 	
